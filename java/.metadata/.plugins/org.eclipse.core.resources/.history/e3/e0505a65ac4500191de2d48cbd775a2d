@@ -1,0 +1,16 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.object;
+
+public class PubmedMetadata {
+
+	private String title;
+	private String authors;
+	private String publicdate;
+	private String journal;
+	
+	public PubmedMetadata(JSONObject o)
+	{
+		
+	}
+	
+	
+}

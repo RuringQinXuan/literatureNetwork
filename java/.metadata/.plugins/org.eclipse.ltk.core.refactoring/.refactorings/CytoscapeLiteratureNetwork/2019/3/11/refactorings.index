@@ -1,0 +1,13 @@
+1552407959357	Delete element
+1552407965170	Move compilation unit
+1552411122516	Move compilation unit
+1552411131923	Move compilation unit
+1552469124091	Rename package 'com.cytoscape.client.view'
+1552470786237	Rename package 'com.cytoscape.client.internal'
+1552472408810	Extract local variable 'jComboBox'
+1552482953763	Rename type 'SearchPubmedID'
+1552484693437	Rename package 'com.cytoscape.client.common'
+1552484700491	Delete elements
+1552484705778	Delete element
+1552499222840	Delete element
+1552499226735	Delete element

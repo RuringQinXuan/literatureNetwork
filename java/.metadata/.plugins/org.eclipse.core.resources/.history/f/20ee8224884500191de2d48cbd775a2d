@@ -1,0 +1,200 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.view;
+
+import java.awt.event.*;
+import java.awt.*;
+import javax.swing.*;
+
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.EntitiesInterface;
+
+import java.net.*;
+import java.io.*;
+
+public class Interface extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JPanel jp2,jp11,jp111,jp12,jp13,jp21,jp22,jp23;
+	JButton jb1,jb2,jb3,jb4,jb5,jb6;
+	JLabel jl1,jl2,lj3;
+	JTextField jtd1,jtd2;
+	JCheckBox jcb1;
+	JTextArea jta1,jta2;
+	JScrollPane jscrollp1,jscrollp2;
+	JSplitPane jsp;
+	JComboBox jcb=null;
+	
+	public Interface(){
+		//define 
+		
+
+		
+		
+		jl1= new JLabel("Species:");
+		jl2= new JLabel("PubMed Query:");
+		lj3= new JLabel("PubMed Query Result:");
+
+		//jtd1= new JTextField(30);
+		String []chatter={"Homo sapiens","haloarchaeon 3A1_DGR","all Species"};
+		jcb= new JComboBox(chatter);
+		jb1= new JButton("delete");
+		jb2= new JButton("pause");
+		jb3= new JButton("run");
+		jb3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get the contents of the JTextArea component.
+                String contents = jta1.getText();
+                System.out.println("contents = " + contents);
+            }
+        });
+		jb4= new JButton("Cancel");
+		jb4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get the contents of the JTextArea component.
+            	setVisible(false); //you can't see me!
+            	dispose();
+            }
+			});
+		jb5= new JButton("next");
+		jb6 = new JButton("refresh");
+		
+		
+
+		jta1= new JTextArea (30,30);
+		String text = "Input query";
+		jta1.setText(text);
+		jta1.setLineWrap(true);
+		jta1.setWrapStyleWord(true);
+		jta2=new JTextArea(30,30);
+		
+		jscrollp1=new JScrollPane(jta1);
+		jscrollp2=new JScrollPane(jta2);
+		
+		jsp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		jsp.setOneTouchExpandable(true);
+		jsp.setLayout(new BorderLayout());
+		
+		MyJPanel jp1=new MyJPanel();	
+		jp2=new JPanel();
+		jp11=new JPanel();	
+		jp111=new JPanel();	
+		jp12=new JPanel();
+		jp13=new JPanel();	
+		jp21=new JPanel();
+		jp22=new JPanel();	
+		jp23=new JPanel();
+		jp1.setLayout(new BorderLayout());
+		jp1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		jp2.setLayout(new BorderLayout());
+		jp2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		jp11.setLayout(new BorderLayout());
+		jp21.setLayout(new BorderLayout());
+		Insets insets = jp1.getInsets();
+
+
+		// search site
+		jp111.add(jl1);
+		jp111.add(jcb);
+		jp11.add(jp111,BorderLayout.WEST);
+		jp11.add(jl2,BorderLayout.SOUTH);
+		jp13.add(jb1);
+		jp13.add(jb2);
+		jp13.add(jb3);
+		jp1.add(jp11,BorderLayout.NORTH);
+		jp1.add(jscrollp1,BorderLayout.CENTER);
+		jp1.add(jp13,BorderLayout.SOUTH);
+		// result display site
+		
+		jsp.add(jscrollp2,BorderLayout.CENTER);
+		jsp.add(jb6,BorderLayout.EAST);
+		jp21.add(jb5,BorderLayout.EAST);
+		jp21.add(jb4,BorderLayout.WEST);
+		
+		jp2.add(lj3,BorderLayout.NORTH);
+		jp2.add(jsp,BorderLayout.CENTER);
+		jp2.add(jp21,BorderLayout.SOUTH);
+
+		Pubmed pubmed=new Pubmed();	
+		jb1.addActionListener(this);
+		jb1.addActionListener(pubmed);
+		jb1.setActionCommand("aa");
+		jb2.addActionListener(this);
+		jb2.setActionCommand("bb");
+		jb3.addActionListener(pubmed);
+		jb3.setActionCommand("search pubmed");
+		jb5.addActionListener(this);
+		jb5.setActionCommand("next");
+		
+		//layout
+		
+		this.setLayout(new GridLayout(2,1));
+		this.add(jp1);
+		this.add(jp2);
+		this.setSize(800 + insets.left + insets.right,
+                600 + insets.top + insets.bottom);
+		this.setTitle("Literature Netwrok");
+		//this.setIconImage((new ImageIcon("images/images.jpeg")).getImage());
+		this.setLocation(100, 100);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setVisible(true);
+		this.addKeyListener(jp1);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("aa"))
+		{
+			System.out.println("click aa");
+		}
+		else if(e.getActionCommand().equals("bb"))
+		{
+			System.out.println("click bb");
+		}if(e.getActionCommand().equals("next"))
+		{
+			 EntitiesInterface ei =new  EntitiesInterface();
+			 ei.setVisible(true);
+			 setVisible(false); //you can't see me!
+			 dispose();
+		}
+	}
+
+}
+
+class Pubmed implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		if(arg0.getActionCommand().equals("search pubmed"))
+		{
+			System.out.println("pubmed listening");
+		}
+		
+	}	
+}
+
+class  MyJPanel extends  JPanel implements KeyListener
+{
+	/**
+	 * 
+	 */
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("search"+e.getKeyCode());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

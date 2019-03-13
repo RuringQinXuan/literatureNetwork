@@ -1,0 +1,102 @@
+package com.cytoscape.client.internal.view;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.Interface;
+
+public class EntitiesInterface extends JFrame{
+	
+	JButton jb1,jb2,jb3,jb4,jb5=null;
+	JLabel jl1,jl2,jl3,jl4,jl5,jl6=null;
+	JPanel jpResult,jpSearch,jps1,jps11,jps111,jps112,jps12,jps2,jps3=null;
+	JComboBox<?> jcb;
+	JTextField jtd1,jtd2,jtd3;
+	JTextArea jta1;
+
+
+	public EntitiesInterface()
+	{
+		final JSlider slider1 = new JSlider(0, 100, 40);
+		final JSlider slider2 = new JSlider(0, 10000, 100);
+		slider1.setMinorTickSpacing(1);
+		slider2.setMinorTickSpacing(1);
+		slider1.setMajorTickSpacing(10);
+		slider2.setMajorTickSpacing(500);
+		slider1.setPaintTicks(true);
+        //slider1.setPaintLabels(true);
+		slider2.setPaintTicks(true);
+        //slider2.setPaintLabels(true);
+		
+		jb1=new JButton("import");
+		jb2=new JButton("back");
+		jb2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Get the contents of the JTextArea component.
+            	Interface Interface = new Interface();
+            	setVisible(false); //you can't see me!
+   			 dispose();
+   			 
+            }
+        });
+		
+		jl1=new JLabel("Extraction Controls");
+		jl2=new JLabel("Entity Type");
+		jl3=new JLabel("Entity Type Content ");
+        jl4=new JLabel("confidence (Score) cutoff: ");
+        jl5=new JLabel("Maxinum number of proteins:  ");
+        jl6=new JLabel("Entity Query:  ");
+        
+        jta1=new JTextArea(50,60);
+        jta1.setLineWrap(true);
+		jta1.setWrapStyleWord(true);
+		
+		jtd1=new JTextField(5);
+		jtd2=new JTextField(20);
+		
+        jps1=new JPanel();
+        jps11=new JPanel();
+        jps111=new JPanel();
+        jps12=new JPanel();
+        jps11.setLayout(new GridLayout(2,1));
+        jps11.setLayout(new GridLayout(1,2));
+        jps12.setLayout(new GridLayout(2,1));
+        jps2=new JPanel();
+        jps3=new JPanel();
+        jps1.setLayout(new BorderLayout());
+		jps2.setLayout(new BorderLayout());
+		jps3.setLayout(new BorderLayout());
+        jpSearch=new JPanel();
+        jpSearch.setLayout(new GridLayout(2,1));
+        jpResult =new JPanel();
+        jpResult.setLayout(new BorderLayout());
+        
+
+        jps11.add(jl1);
+        jps111.add(jl2);
+        jps111.add(jtd1);
+        jps11.add(jps111);
+        
+        jps1.add(jps11,BorderLayout.WEST);
+        jps2.add(jl4,BorderLayout.WEST);
+        jps1.add(slider1,BorderLayout.CENTER);
+        jps2.add(slider2,BorderLayout.CENTER);
+        jps3.add(jb2,BorderLayout.WEST);
+        jps3.add(jb1,BorderLayout.EAST);
+        jpSearch.add(jps1);
+        jpSearch.add(jps2);
+        jpResult.add(jl5,BorderLayout.NORTH);
+        jpResult.add(jta1,BorderLayout.CENTER);
+        jpResult.add(jps3,BorderLayout.SOUTH);
+        
+        this.setLayout(new GridLayout(2,1));
+        this.add(jpSearch);
+		this.add(jpResult);
+		this.setSize(500,600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}
+}
