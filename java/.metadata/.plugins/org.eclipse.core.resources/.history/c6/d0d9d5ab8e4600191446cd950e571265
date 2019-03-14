@@ -225,8 +225,8 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 			BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
-			 setVisible(false); //you can't see me!
-			 dispose();
+			 //setVisible(false); //you can't see me!
+			 //dispose();
 			}
 			else{
 				System.out.println("print run first");

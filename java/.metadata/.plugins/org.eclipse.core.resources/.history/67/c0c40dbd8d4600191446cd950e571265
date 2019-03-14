@@ -171,7 +171,7 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		jb3.addActionListener(this);
 		jb3.setActionCommand("run");
 		jb4.addActionListener(this);
-		jb4.setActionCommand("back");
+		jb4.setActionCommand("cancel");
 		jb5.addActionListener(this);
 		jb5.setActionCommand("import");
         
@@ -232,9 +232,8 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 				System.out.println("print run first");
 			}
 		}
-		else if(e.getActionCommand().equals("back"))
+		else if(e.getActionCommand().equals("cancle"))
 		{
-			
 			 setVisible(false); //you can't see me!
 			 dispose();
 		}

@@ -3,7 +3,6 @@ package com.cytoscape.CytoscapeLiteratureNetwork.internal.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 	
 	private List<String> pubmed_ids;
 	private String type2;
-	private List<String> entity_ids=null;
+	private List<String> entity_ids;
 	private CyServiceRegistrar serviceRegistrar;
 
 	public EntitiesInterface(CyServiceRegistrar serviceRegistrar, List<String> ids)
@@ -170,10 +169,6 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		jb2.setActionCommand("pause");
 		jb3.addActionListener(this);
 		jb3.setActionCommand("run");
-		jb4.addActionListener(this);
-		jb4.setActionCommand("back");
-		jb5.addActionListener(this);
-		jb5.setActionCommand("import");
         
         this.setLayout(new GridLayout(2,1));
         this.add(jpSearch);
@@ -216,25 +211,18 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 			SearchEntityFactory factory=new  SearchEntityFactory(type2,pubmed_ids);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
-			
-		}
-		else if(e.getActionCommand().equals("import"))
-		{
-			if(jta1.getText()!=null){
-				System.out.println("Start network");
-			BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
-			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
-			taskManager.execute(factory.createTaskIterator(), this);
-			 setVisible(false); //you can't see me!
-			 dispose();
-			}
-			else{
-				System.out.println("print run first");
+			if(e.getActionCommand().equals("import"))
+			{
+
+				BuildNetworkFactory factory1=new BuildNetworkFactory(pubmed_ids,entity_ids);
+				TaskManager<?,?> taskManager1 = this.serviceRegistrar.getService(TaskManager.class);
+				taskManager.execute(factory.createTaskIterator(), this);
+				 setVisible(false); //you can't see me!
+				 dispose();
 			}
 		}
-		else if(e.getActionCommand().equals("back"))
+		else if(e.getActionCommand().equals("cancle"))
 		{
-			
 			 setVisible(false); //you can't see me!
 			 dispose();
 		}
@@ -253,13 +241,17 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		//todo
 		if(arg0.getClass().getSimpleName().equals("SearchEntityTask")) {
 			String text = "";
-			entity_ids= new ArrayList();
+			
 			for(PubmedEntity et : (List<PubmedEntity>) arg0.getResults(List.class)) {
 				text += et.getType()+"."+et.getEntityID() +"\t"+et.getName()+ "\n";
 				entity_ids.add(et.getEntityID());
 			}
 			
 			jta1.setText(text);
+			if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
+				
+				
+			}
 		} 
 	}
 }

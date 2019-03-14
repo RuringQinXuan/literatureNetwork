@@ -170,10 +170,6 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		jb2.setActionCommand("pause");
 		jb3.addActionListener(this);
 		jb3.setActionCommand("run");
-		jb4.addActionListener(this);
-		jb4.setActionCommand("back");
-		jb5.addActionListener(this);
-		jb5.setActionCommand("import");
         
         this.setLayout(new GridLayout(2,1));
         this.add(jpSearch);
@@ -220,21 +216,19 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		}
 		else if(e.getActionCommand().equals("import"))
 		{
-			if(jta1.getText()!=null){
-				System.out.println("Start network");
-			BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
-			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
-			taskManager.execute(factory.createTaskIterator(), this);
-			 setVisible(false); //you can't see me!
-			 dispose();
-			}
-			else{
-				System.out.println("print run first");
-			}
+//			if(jta1.getText()!=null){
+//			BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
+//			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+//			taskManager.execute(factory.createTaskIterator(), this);
+//			 setVisible(false); //you can't see me!
+//			 dispose();
+//			}
+//			else{
+//				System.out.println("print run first");
+//			}
 		}
-		else if(e.getActionCommand().equals("back"))
+		else if(e.getActionCommand().equals("cancle"))
 		{
-			
 			 setVisible(false); //you can't see me!
 			 dispose();
 		}

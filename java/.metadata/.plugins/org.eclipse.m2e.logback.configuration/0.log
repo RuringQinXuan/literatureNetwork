@@ -3006,3 +3006,153 @@ org.eclipse.core.runtime.CoreException: Could not read maven project
 2019-03-15 02:36:14,358 [Worker-115] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
 2019-03-15 02:42:20,723 [Worker-16] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
 2019-03-15 02:42:20,792 [Worker-16] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 02:45:18,869 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:45:18,962 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:45:18,964 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:45:18,965 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:48:16,325 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:48:16,331 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:48:16,333 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:48:16,333 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:49:15,490 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:15,490 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:49:15,492 [Worker-3] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:15,495 [Worker-3] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:49:19,284 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:19,288 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:49:19,292 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:19,292 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:49:30,436 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:30,436 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:49:30,438 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:30,438 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:49:44,022 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:44,023 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:49:44,045 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:49:44,053 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:50:02,118 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:50:02,118 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:50:02,120 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:50:02,120 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:51:17,804 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:51:17,805 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:51:17,813 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:51:17,813 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:52:41,312 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:52:41,313 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:52:41,315 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:52:41,316 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:56:42,029 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:56:42,029 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:56:42,067 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:56:42,069 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:56:46,607 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:56:46,607 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:56:46,609 [Worker-20] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:56:46,609 [Worker-20] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:58:02,904 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:58:02,904 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:58:02,912 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:58:02,912 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:59:55,608 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:59:55,609 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 02:59:55,620 [Worker-10] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 02:59:55,620 [Worker-10] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 02:59:57,844 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 02:59:57,844 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:01:21,207 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:01:21,207 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:01:21,209 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:01:21,209 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:01:24,290 [Worker-21] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:01:24,291 [Worker-21] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:02:31,352 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:02:31,352 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:02:31,354 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:02:31,354 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:02:33,250 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:02:33,250 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:04:39,138 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:04:39,139 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:04:39,147 [Worker-21] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:04:39,148 [Worker-21] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:04:40,538 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:04:40,539 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:08:52,470 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:08:52,470 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:08:52,472 [Worker-16] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:08:52,472 [Worker-16] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:08:59,936 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:08:59,937 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:08:59,938 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:08:59,938 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:09:03,123 [Worker-21] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:09:03,123 [Worker-21] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:11:39,075 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:11:39,076 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:11:39,077 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:11:39,077 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:11:41,345 [Worker-16] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:11:41,345 [Worker-16] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:13:07,164 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:13:07,179 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:13:07,181 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:13:07,181 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:13:09,320 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:13:09,320 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:14:49,042 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:14:49,043 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:14:49,044 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:14:49,044 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:16:59,145 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:16:59,154 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:16:59,156 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:16:59,156 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:17:06,305 [Worker-20] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:17:06,305 [Worker-20] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:17:55,983 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:17:55,983 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:17:55,984 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:17:55,985 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:18:09,912 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:18:09,912 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:20:55,092 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:20:55,092 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:20:55,094 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:20:55,094 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:21:31,011 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:21:31,011 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:21:31,012 [Worker-23] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:21:31,013 [Worker-23] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:21:32,853 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:21:32,853 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:23:24,617 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:23:24,617 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:23:24,624 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:23:24,624 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:23:26,422 [Worker-20] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:23:26,423 [Worker-20] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:23:39,564 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:23:39,564 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:23:39,565 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:23:39,566 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:25:19,260 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:25:19,260 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:25:19,302 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:25:19,302 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:25:24,201 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:25:24,201 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:25:24,202 [Worker-22] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:25:24,203 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:25:26,196 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:25:26,196 [Worker-12] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
+2019-03-15 03:26:54,588 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:26:54,588 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:26:54,589 [Worker-12] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:26:54,590 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:26:58,869 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:26:58,869 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/main/resources
+2019-03-15 03:26:58,871 [Worker-2] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-03-15 03:26:58,871 [Worker-2] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork/src/test/resources
+2019-03-15 03:27:00,836 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate - /home/xqin/software/jensentask/OnlineNetwork/java/CytoscapeLiteratureNetwork
+2019-03-15 03:27:00,836 [Worker-22] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B install
