@@ -14,6 +14,7 @@ public class CyActivator extends AbstractCyActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
+		System.out.println("\n\nStarting Cytoscape Literature Network\n");
 		CyServiceRegistrar serviceRegistrar = getService(context, CyServiceRegistrar.class);
 		// TODO Auto-generated method stub
 		ShowPanelTaskFactory spt=new ShowPanelTaskFactory(serviceRegistrar);

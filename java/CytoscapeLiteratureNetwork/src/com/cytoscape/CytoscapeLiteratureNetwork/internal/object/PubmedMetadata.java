@@ -20,7 +20,9 @@ public class PubmedMetadata {
 		for(Object author : listauthors){
 			authors += ", " + (String)((JSONObject)author).get("name");
 		}
-		authors = authors.substring(2);
+		if(authors.length()>2) {
+			authors = authors.substring(2);
+		}
 	}
 
 	public String getTitle() {

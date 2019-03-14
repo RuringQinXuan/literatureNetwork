@@ -39,6 +39,8 @@ public class Interface extends JFrame implements ActionListener, TaskObserver{
 	JSplitPane jsp;
 	JComboBox jcb=null;
 	
+	private List<String> pubmed_ids;
+	
 	private CyServiceRegistrar serviceRegistrar;
 	
 	public Interface(CyServiceRegistrar serviceRegistrar){
@@ -65,7 +67,7 @@ public class Interface extends JFrame implements ActionListener, TaskObserver{
 		jb7 = new JButton("refresh");
 
 		jta1= new JTextArea (30,30);
-		String text = "Input query";
+		String text = "pancreatic cancer";
 		jta1.setText(text);
 		jta1.setLineWrap(true);
 		jta1.setWrapStyleWord(true);
@@ -167,14 +169,13 @@ public class Interface extends JFrame implements ActionListener, TaskObserver{
 		}
 		else if(e.getActionCommand().equals("run"))
 		{
-			query=jta1.getText();
-			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(query);
+			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(jta1.getText());
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		}
 		else if(e.getActionCommand().equals("next"))
 		{
-			 EntitiesInterface ei =new  EntitiesInterface();
+			 EntitiesInterface ei =new EntitiesInterface(serviceRegistrar, pubmed_ids);
 			 ei.setVisible(true);
 			 setVisible(false); //you can't see me!
 			 dispose();
@@ -196,14 +197,15 @@ public class Interface extends JFrame implements ActionListener, TaskObserver{
 	@Override
 	public void taskFinished(ObservableTask arg0) {
 		if(arg0.getClass().getSimpleName().equals("SearchPubmedIDTask")) {
-			SearchPubmedMetadataFactory factory=new SearchPubmedMetadataFactory((List<String>) arg0.getResults(List.class));
+			pubmed_ids = (List<String>) arg0.getResults(List.class);
+			SearchPubmedMetadataFactory factory=new SearchPubmedMetadataFactory(pubmed_ids);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		} else if(arg0.getClass().getSimpleName().equals("SearchPubmedMetadataTask")) {
 			String text = "";
 			
 			for(PubmedMetadata pm : (List<PubmedMetadata>) arg0.getResults(List.class)) {
-				text += pm.getTitle() + "/n";
+				text += pm.getTitle() + "\n";
 			}
 			
 			jta2.setText(text);

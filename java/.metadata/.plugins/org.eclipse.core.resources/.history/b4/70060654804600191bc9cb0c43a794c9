@@ -1,0 +1,40 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.object;
+
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+public class Network {
+
+
+
+
+
+	private JSONObject edges;
+	private ArrayList<String> nodes;
+	private Map<String, String>  sentences;
+	
+	
+	public Network(Object result)
+	{
+		this.edges=(JSONObject) result.get("edges");
+		this.nodes=(ArrayList<String>) result.get("nodes");
+		this.sentences= (Map<String, String>) result.get("sentences");
+	}
+
+	public Object getEdges() {
+		return edges;
+	}
+
+	public Object getNodes() {
+		return nodes;
+	}
+
+	public Object getSentences() {
+		return sentences;
+	}
+	
+	
+}
