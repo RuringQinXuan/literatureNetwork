@@ -1,5 +1,0 @@
-package com.cytoscape.CytoscapeLiteratureNetwork.internal.io;
-
-public class HttpUtils {
-
-}

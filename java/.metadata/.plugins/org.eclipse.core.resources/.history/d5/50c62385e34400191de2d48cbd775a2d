@@ -1,8 +1,0 @@
-package com.cytoscape.client.tools;
-
-public class Snippet {
-	public static void main(String[] args) {
-		InterfaceEntities
-	}
-}
-

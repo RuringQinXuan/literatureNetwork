@@ -6,4 +6,11 @@
 <fullyQualifiedTypeName name="java.awt.GridLayout"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedMetadata"/>
 <fullyQualifiedTypeName name="org.cytoscape.service.util.CyServiceRegistrar"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Network"/>
 </qualifiedTypeNameHistroy>

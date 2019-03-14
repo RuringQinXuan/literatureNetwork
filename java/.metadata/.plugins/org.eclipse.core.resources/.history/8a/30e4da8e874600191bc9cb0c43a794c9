@@ -13,14 +13,12 @@ import org.cytoscape.work.FinishStatus;
 import org.cytoscape.work.ObservableTask;
 import org.cytoscape.work.TaskManager;
 import org.cytoscape.work.TaskObserver;
+import org.json.simple.JSONObject;
 
 import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity;
-import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedMetadata;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.BulidNetworkFactory;
 import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory;
-import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedIDFactory;
-import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedMetadataFactory;
 import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.Interface;
-
 public class EntitiesInterface extends JFrame implements ActionListener, TaskObserver{
 	
 	JButton jb1,jb2,jb3,jb4,jb5=null;
@@ -32,6 +30,7 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 	JScrollPane jscrollp1;
 	
 	private List<String> pubmed_ids;
+	private List<String> entity_ids;
 	private String type2;
 	
 	private CyServiceRegistrar serviceRegistrar;
@@ -40,7 +39,6 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 	{
 		this.serviceRegistrar=serviceRegistrar;
 		this.pubmed_ids=ids;
-		
 		final JSlider slider1 = new JSlider(0, 100, 40);
 		final JSlider slider2 = new JSlider(0, 10000, 100);
 		slider1.setMinorTickSpacing(1);
@@ -69,7 +67,7 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		jb3= new JButton("run");
 	
 		
-		String []chatter={"homo sapiens\t9606"};
+		String []chatter={"homo sapiens   \t9606"};
 		JComboBox jComboBox = new JComboBox(chatter);
 		jcb= jComboBox;
 		jcb.addActionListener(new ActionListener() {
@@ -214,8 +212,11 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 		else if(e.getActionCommand().equals("import"))
 		{
 
-			 setVisible(false); //you can't see me!
-			 dispose();
+			BulidNetworkFactory factory=new  BulidNetworkFactory(pubmed_ids,entity_ids);
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this); 
+			setVisible(false); //you can't see me!
+			dispose();
 		}
 		else if(e.getActionCommand().equals("cancle"))
 		{
@@ -240,10 +241,16 @@ public class EntitiesInterface extends JFrame implements ActionListener, TaskObs
 			
 			for(PubmedEntity et : (List<PubmedEntity>) arg0.getResults(List.class)) {
 				text += et.getType()+"."+et.getEntityID() +"\t"+et.getName()+ "\n";
-				
+				entity_ids.add(et.getEntityID());
+			}
+			jta1.setText(text);
+			if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
+				BulidNetworkFactory factory =new BulidNetworkFactory(pubmed_ids,entity_ids);
+				TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+				taskManager.execute(factory.createTaskIterator(), this);
+				System.out.println("network build");
 			}
 			
-			jta1.setText(text);
 		} 
 	}
 }
