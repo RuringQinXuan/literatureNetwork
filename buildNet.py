@@ -9,6 +9,7 @@
 #connect to database to search co-ocurrance relation between entities in certain type from pmid_list file
 
 import psycopg2
+import re
 from itertools import combinations
 
 #import time
@@ -22,12 +23,12 @@ from itertools import combinations
 
 
 def Get_documents(documents):
-        pmidList = documents.split('\\n')
+        pmidList = re.split("\s+",documents)
         documents = str(pmidList).replace('[','').replace(']','')
         return pmidList,documents
 
 def Get_entities(entities):
-        entityList = entities.split('\\n')
+        entityList = re.split("\s+",entities)
         for i in range(len(entityList)):
                 entityList[i] = entityList[i].split('.')
                 entities = str(entityList).replace("], [","),(").replace("[[","(").replace("]]",")")
@@ -75,6 +76,26 @@ def Get_sentence_location(conn,documents):
                         sentence_location[row[0]].append((row[1],row[2]))
         return sentence_location
 
+def match_entity_name(nodes):
+	con = psycopg2.connect(host = "localhost", port = "5432",dbname = "dictionary", user = "guest",password = "")
+	cur = con.cursor()
+	node_list={}
+	for node in nodes:
+		type_id = node.split('.')
+		node_list[node] = {"name":type_id[1],"type_id":node,"type":type_id[0],"id":type_id[1]}
+	entiti=[]
+	for i in range(len(nodes)):
+		nodes[i] = nodes[i].split('.')
+		entities = str(nodes).replace("], [","),(").replace("[[","(").replace("]]",")")
+	sql="select * from preferred where (type,id) in(%s);" % (entities)
+	cur.execute(sql)
+	rows = cur.fetchall()
+	for row in rows:
+		node_list[str(row[0])+'.'+row[1]]={"name":row[2],"type_id":str(row[0])+'.'+row[1],"type":row[0],"id":row[1]}
+	con.close()
+	return node_list
+        
+
 def Get_abstracts(conn,documents):
         try:
                 cur = conn.cursor()
@@ -94,8 +115,8 @@ def Get_abstracts(conn,documents):
 def Get_result(documents,entities):
         documents=str(documents)
         entities=str(entities)
-        #documents = "30030436\n30030434\n30760519"
-        #entities = "9606.ENSP00000365687\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000356213\n9606.ENSP00000466090\n9606.ENSP00000229135\n9606.ENSP00000466090\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000277541\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000358363\n9606.ENSP00000437256\n9606.ENSP00000425979\n9606.ENSP00000437256\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000405330\n9606.ENSP00000405330\n9606.ENSP00000216037\n9606.ENSP00000250448\n9606.ENSP00000399356"
+        print(documents)
+        print(entities)
         result_relation={}
         sentences_database={}
         pmidList,documents = Get_documents(documents)
@@ -135,13 +156,15 @@ def Get_result(documents,entities):
                                         sentenceEntityList=set()
                                         if st == len(sentencelocation):
                                                 break
+        conn.close()
         edges=[]
         nodes=set()
         for node in result_relation.keys():
                 edges.append({"source":node[0],"target":node[1],"sentences":result_relation[node]})
-                nodes.update([node[0]])
-                nodes.update([node[1]])
+                nodes.add(node[0])
+                nodes.add(node[1])
         nodes=list(nodes)
-        result={"edges":edges,"nodes":nodes,"sentences":sentences_database}
+        nodes_list=match_entity_name(nodes)
+        result={"edges":edges,"nodes":nodes_list,"sentences":sentences_database}
         return result
 

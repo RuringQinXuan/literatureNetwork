@@ -28,16 +28,19 @@ public class BuildNetworkTask extends AbstractTask implements ObservableTask{
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		// TODO Auto-generated method stub
-		String query_documents = String.join("\n", documents.subList(0,300));
+		String query_documents = String.join("\n", documents);
+				//.subList(0,300));
 		String query_entities = String.join("\n", entities);
 		Map<String, String> args1 = new HashMap<>();
 		args1.put("documents",query_documents);
 		args1.put("entities",query_entities);
 		monitor.setStatusMessage("Querying LiteratureNetwork for network");
-		result = HttpUtils.postJSON("http://localhost:9000/getdata",
-				args1);
-
-
+		monitor.setStatusMessage("URL: http://localhost:9000/getdata?documents=" + query_documents + "&entities=" + query_entities);
+		result = (JSONObject)HttpUtils.postJSON("http://localhost:9000/getdata",
+				args1).get("result");
+		
+		
+		
 		if (result == null) {
 			monitor.showMessage(TaskMonitor.Level.ERROR,"Pubmed returned no results");
 			// System.out.println("object wrong type: "+object.toString());

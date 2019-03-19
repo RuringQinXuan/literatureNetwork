@@ -47,7 +47,7 @@ public class SearchEntityTask extends AbstractTask implements ObservableTask {
 		args.put("type2", type2);
 		monitor.setTitle("Querying STRING");
 		monitor.setStatusMessage("Querying PubMed Entities");
-		JSONObject object = HttpUtils.postJSON("https://api11.jensenlab.org/Textmining",
+		JSONObject object = HttpUtils.postJSON("https://api.jensenlab.org/Textmining",
 				args);
 		
 		JSONArray result = (JSONArray) object.get("result");
