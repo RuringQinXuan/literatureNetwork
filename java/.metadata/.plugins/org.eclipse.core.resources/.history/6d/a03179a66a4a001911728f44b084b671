@@ -1,11 +1,5 @@
 package com.cytoscape.CytoscapeLiteratureNetwork.internal.task;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyRow;
@@ -14,7 +8,7 @@ import org.cytoscape.work.TaskMonitor;
 
 public class ShowSentenceTask extends AbstractTask {
 	private CyNetwork network;
-	private CyRow edgeRow;
+	private CyEdge edge;
 
 	public ShowSentenceTask(CyNetwork network) {
 		this(network, null);
@@ -22,26 +16,24 @@ public class ShowSentenceTask extends AbstractTask {
 	public ShowSentenceTask(CyNetwork network, CyEdge edge) {
 		super();
 		this.network = network;
-		this.edgeRow=this.network.getDefaultEdgeTable().getRow(edge.getSUID());
+		this.edge=edge;
 	}
 
 	@Override
 	public void run(TaskMonitor arg0) throws Exception {
-		
-		if(this.edgeRow == null) {
-			//TODO: Show error message
-			return;
+		if(edge == null) {
+			for(CyRow edgeRow : this.network.getDefaultEdgeTable().getAllRows()) {
+				if(edgeRow.get(CyNetwork.SELECTED, Boolean.class)) {
+					this.edge = this.network.getEdge(edgeRow.get(CyNetwork.SUID, Long.class));
+					break;
+				}
+			}
 		}
 		
-		
-		JFrame jf = new JFrame();
-		JTextArea jta = new JTextArea(400,300);
-		jta.setText(edgeRow.get("sentence_text", String.class));
-		JScrollPane jscrollp=new JScrollPane(jta);
-		jf.setLayout(new BorderLayout());
-		jf.add(jscrollp,BorderLayout.CENTER);
-		jf.setSize(400,300);
-		jf.setVisible(true);
+		if(this.edge == null) {
+			//TODO: Show error message
+		}
+		this.network.getDefaultEdgeTable().getAllRows().get(0).get(CyNetwork.SELECTED, Boolean.class);
 	}
 
 }

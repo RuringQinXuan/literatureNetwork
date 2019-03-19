@@ -74,9 +74,9 @@ public class ShowNetworkTask extends AbstractTask {
 			// set name for new edges
 			myNet.getDefaultEdgeTable().getRow(edge1.getSUID()).set("name", edge.get("sentences").toString());
 			List<String> sentenceList=(List<String>) edge.get("sentences");
-			String sentence_content = "";
+			ArrayList<String> sentence_content = new ArrayList<String>();
 			for (int i = 0; i < sentenceList.size(); i++) {
-				sentence_content+=sentences.get(sentenceList.get(i))+"\n";
+				sentence_content.add(sentences.get(sentenceList.get(i)));
 			}
 			myNet.getDefaultEdgeTable().getRow(edge1.getSUID()).set("sentence_text", sentence_content.toString());
 		}

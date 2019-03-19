@@ -28,7 +28,7 @@ public class Species {
 			return;
 		String columns[] = line.trim().split("\t");
 		if (columns.length < 4)
-			//throw new IllegalArgumentException("Can't parse line: "+line + "\n" + columns.length);
+			throw new IllegalArgumentException("Can't parse line: "+line + "\n" + columns.length);
 		try {
 			int tax = Integer.parseInt(columns[0]);
 			List<String> intPartnersList = new ArrayList<String>();
