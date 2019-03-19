@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
-import org.cytoscape.task.EdgeViewTaskFactory;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.osgi.framework.BundleContext;
@@ -30,9 +29,8 @@ public class CyActivator extends AbstractCyActivator {
 			ShowSentenceFactory ssf = new ShowSentenceFactory();
 			Properties p =new Properties();
 			p.setProperty(ServiceProperties.PREFERRED_MENU, "Apps");
-			p.setProperty(ServiceProperties.IN_CONTEXT_MENU, "true");
-			p.setProperty(ServiceProperties.TITLE, "Show sentences");
-			registerService(context,ssf,EdgeViewTaskFactory.class,p);
+			p.setProperty(ServiceProperties.TITLE, "Literature Network");
+			registerService(context,ssf,TaskEdgeViewFactory.class,p);
 		}
 	}
 

@@ -1,0 +1,15 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.task;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.task.AbstractNetworkTaskFactory;
+import org.cytoscape.work.TaskIterator;
+
+public class ShowSentenceFactory extends AbstractNetworkTaskFactory {
+
+	@Override
+	public TaskIterator createTaskIterator(CyNetwork arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

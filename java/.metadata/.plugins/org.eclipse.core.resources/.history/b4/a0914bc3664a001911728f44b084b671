@@ -31,7 +31,7 @@ public class CyActivator extends AbstractCyActivator {
 			Properties p =new Properties();
 			p.setProperty(ServiceProperties.PREFERRED_MENU, "Apps");
 			p.setProperty(ServiceProperties.IN_CONTEXT_MENU, "true");
-			p.setProperty(ServiceProperties.TITLE, "Show sentences");
+			p.setProperty(ServiceProperties.TITLE, "Literature Network");
 			registerService(context,ssf,EdgeViewTaskFactory.class,p);
 		}
 	}

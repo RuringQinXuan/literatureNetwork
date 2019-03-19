@@ -1,0 +1,21 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.task;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.work.AbstractTask;
+import org.cytoscape.work.TaskMonitor;
+
+public class ShowSentenceTask extends AbstractTask {
+	private CyNetwork network;
+	private CyEdge edge;
+	
+	public ShowSentenceTask(CyNetwork network) {
+		super();
+		this.network = network;
+	}
+
+	@Override
+	public void run(TaskMonitor arg0) throws Exception {
+		this.network.getDefaultEdgeTable().getAllRows().get(0).get(CyNetwork.SELECTED, Boolean.class);
+	}
+
+}
