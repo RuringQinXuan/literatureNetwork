@@ -2,15 +2,28 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="org.cytoscape.work.TaskManager"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedMetadataFactory"/>
-<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 <fullyQualifiedTypeName name="java.awt.GridLayout"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedMetadata"/>
-<fullyQualifiedTypeName name="org.cytoscape.service.util.CyServiceRegistrar"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Network"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.ShowSentenceFactory"/>
+<fullyQualifiedTypeName name="org.cytoscape.task.EdgeViewTaskFactory"/>
+<fullyQualifiedTypeName name="org.cytoscape.model.CyNetwork"/>
+<fullyQualifiedTypeName name="org.cytoscape.model.CyEdge"/>
+<fullyQualifiedTypeName name="org.cytoscape.model.CyRow"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="javax.swing.JTextArea"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+<fullyQualifiedTypeName name="org.cytoscape.service.util.CyServiceRegistrar"/>
+<fullyQualifiedTypeName name="org.cytoscape.command.AvailableCommands"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.cytoscape.command.CommandExecutorTaskFactory"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="org.cytoscape.work.TaskObserver"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

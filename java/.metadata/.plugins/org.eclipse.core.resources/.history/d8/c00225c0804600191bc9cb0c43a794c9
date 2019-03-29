@@ -1,5 +1,0 @@
-package com.cytoscape.CytoscapeLiteratureNetwork.internal.task;
-
-public class BulidNetworkFactory {
-
-}

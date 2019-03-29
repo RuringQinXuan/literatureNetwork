@@ -27,7 +27,7 @@ public class CyActivator extends AbstractCyActivator {
 			registerService(context,spt,TaskFactory.class,p);
 		}
 		{
-			ShowSentenceFactory ssf = new ShowSentenceFactory();
+			ShowSentenceFactory ssf = new ShowSentenceFactory(serviceRegistrar);
 			Properties p =new Properties();
 			p.setProperty(ServiceProperties.PREFERRED_MENU, "Apps");
 			p.setProperty(ServiceProperties.IN_CONTEXT_MENU, "true");

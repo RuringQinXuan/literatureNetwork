@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=CytoscapeLiteratureNetwork/\/home\/xqin\/.m2\/repository\/org\/cytoscape\/work-api\/3.7.0\/work-api-3.7.0.jar&lt;org.cytoscape.work(AbstractTask.class[AbstractTask" modifiers="1057" timestamp="1552490784000"/>
 <typeInfo handle="=CytoscapeLiteratureNetwork/\/home\/xqin\/.m2\/repository\/org\/cytoscape\/work-api\/3.7.0\/work-api-3.7.0.jar&lt;org.cytoscape.work(AbstractTaskFactory.class[AbstractTaskFactory" modifiers="1057" timestamp="1552490784000"/>
+<typeInfo handle="=CytoscapeLiteratureNetwork/\/home\/xqin\/.m2\/repository\/org\/cytoscape\/work-api\/3.7.0\/work-api-3.7.0.jar&lt;org.cytoscape.work(AbstractTask.class[AbstractTask" modifiers="1057" timestamp="1552490784000"/>
+<typeInfo handle="=CytoscapeLiteratureNetwork/\/home\/xqin\/.m2\/repository\/org\/cytoscape\/core-task-api\/3.7.0\/core-task-api-3.7.0.jar&lt;org.cytoscape.task(AbstractNetworkTaskFactory.class[AbstractNetworkTaskFactory" modifiers="1057" timestamp="1552502549000"/>
 </typeInfoHistroy>

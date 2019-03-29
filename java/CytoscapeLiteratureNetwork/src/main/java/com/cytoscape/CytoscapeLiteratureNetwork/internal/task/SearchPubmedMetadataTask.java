@@ -28,8 +28,8 @@ public class SearchPubmedMetadataTask extends AbstractTask implements Observable
 
 	public void run(TaskMonitor monitor) {
 		subend=gap;
-		if(subend>=ids.size()){
-			subend=ids.size()-1;
+		if(subend>ids.size()){
+			subend=ids.size();
 		}
 		String query_metadata = String.join(",", ids.subList(0,subend));
 		Map<String, String> args1 = new HashMap<>();
