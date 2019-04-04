@@ -1,0 +1,500 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.view;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxEditor;
+
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.work.FinishStatus;
+import org.cytoscape.work.ObservableTask;
+import org.cytoscape.work.TaskManager;
+import org.cytoscape.work.TaskObserver;
+import org.json.simple.JSONObject;
+
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedMetadata;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Species;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.BuildNetworkFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedIDFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedMetadataFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.ShowNetworkFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.Interface;
+
+public class InterfaceEntity extends JFrame implements ActionListener, TaskObserver,ItemListener{
+	
+	JButton jb1,jb2,jb3,jb4,jb5=null;
+	JLabel jl1,jl2,jl3,jl4,jl5,jl6=null,jTextField1;
+	JPanel jpResult,jpSearch,jps1,jps11,jps111,jps112,jps12,jps2,jps3,jps4,jpr1=null,jpi,jpi1,jpi2,mainP;
+	JComboBox<?> jcb,speciesJcb,jcb2,jcb1;
+	JTextField jtf1,jtf2,jtf3;
+	JTextArea jta1,jta3;
+	JScrollPane jscrollp1;
+	
+	private List<String> pubmed_ids;
+	private String type2;
+	private int limit;
+	private List<String> entity_ids;
+	private CyServiceRegistrar serviceRegistrar;
+
+	public InterfaceEntity(CyServiceRegistrar serviceRegistrar, List<String> ids)
+	{
+		this.serviceRegistrar=serviceRegistrar;
+		this.pubmed_ids=ids;
+		
+		final JSlider slider1 = new JSlider(0, 100, 40);
+		final JSlider slider2 = new JSlider(0, 10000, 100);
+		slider1.setMinorTickSpacing(1);
+		slider2.setMinorTickSpacing(1);
+		slider1.setMajorTickSpacing(10);
+		slider2.setMajorTickSpacing(500);
+		slider1.setPaintTicks(true);
+        //slider1.setPaintLabels(true);
+		slider2.setPaintTicks(true);
+        //slider2.setPaintLabels(true);
+
+		
+		jb1= new JButton("initial");
+		jb3= new JButton("run");
+		jb4=new JButton("back");
+		jb5=new JButton("import");
+				
+		JComboBox speciesJcb = new AutoCompleteSpeciesComboBox();
+		jcb=speciesJcb;
+		jcb.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent evt) {
+	            myBox(evt);
+	            }
+			private void myBox(ActionEvent evt) {
+				// TODO Auto-generated method stub
+					    if (jcb.getSelectedItem() != null) {
+					    	String text=jcb.getSelectedItem().toString();
+					    	String[] taxID=text.split("\t");
+					    	//System.out.println(Arrays.toString(taxID));
+					        jtf1.setText(taxID[1]);
+					    }
+					}
+			
+	        });
+		jcb.setPreferredSize(new Dimension(400,10));
+		jl1=new JLabel("Extraction Controls");
+		jl2=new JLabel("The Species of Protein :");
+		jl3=new JLabel("TaxonomyId");
+        //jl4=new JLabel("confidence (Score) cutoff: ");
+        jl5=new JLabel("Maxinum number of proteins:  ");
+        jl6=new JLabel("Entity Query Result:  ");
+        
+        jta1=new JTextArea(50,60);
+        jta1.setLineWrap(true);
+		jta1.setWrapStyleWord(true);
+		
+		jscrollp1=new JScrollPane(jta1);
+		
+		jtf1=new JTextField(20);
+		jtf1.setEditable(false);
+		jtf1.setText("9606");
+		//jtf2=new JTextField(2);
+		jtf3=new JTextField(2);
+		jtf3.setText("100");
+		
+        
+        jps11=new JPanel();
+        jps111=new JPanel();
+        jps12=new JPanel();
+        jps11.setLayout(new GridLayout(2,1));
+        jps111.setLayout(new BorderLayout(5,5));
+        jps12.setLayout(new GridLayout(2,1));
+        
+       
+        jps1=new JPanel();
+        jps2=new JPanel();
+        jps3=new JPanel();
+        jps4=new JPanel();
+        
+        jps1.setLayout(new BorderLayout(5,5));
+		jps2.setLayout(new BorderLayout(5,10));
+		jps3.setLayout(new BorderLayout(5,5));
+		jps1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		jps2.setBorder(BorderFactory.createEtchedBorder());  
+		jps3.setBorder(BorderFactory.createEtchedBorder());  
+
+        jpSearch=new JPanel();
+        jpSearch.setBorder(BorderFactory.createEmptyBorder(1, 10, 0, 10)); 
+        jpSearch.setLayout(new GridLayout(3,1,5,5));
+
+        jpr1=new JPanel();
+        jpr1.setLayout(new BorderLayout(5,5));
+        jpResult =new JPanel();
+        jpResult.setLayout(new BorderLayout(5,5));
+        jpResult.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10)); 
+
+        jps11.add(jl1);
+        jps111.add(jl2,BorderLayout.WEST);
+        jps111.add(jcb,BorderLayout.CENTER);
+        jps11.add(jps111);
+        jps12.add(jl3);
+        jps12.add(jtf1);
+        
+        jps1.add(jps11,BorderLayout.WEST);
+        jps1.add(jps12,BorderLayout.CENTER);
+       // jps2.add(jl4,BorderLayout.WEST);
+       //// jps2.add(slider1,BorderLayout.CENTER);
+       // jps2.add(jtf2,BorderLayout.EAST);
+        
+        jps3.add(jl5,BorderLayout.WEST);
+        jps3.add(slider2,BorderLayout.CENTER);
+        jps3.add(jtf3,BorderLayout.EAST);
+        
+        jps4.add(jb1);
+        
+        jps4.add(jb3);
+        
+        
+        jpSearch.add(jps1);
+        //jpSearch.add(jps2);
+        jpSearch.add(jps3);
+        jpSearch.add(jps4);
+        
+        jpr1.add(jb4,BorderLayout.WEST);
+        jpr1.add(jb5,BorderLayout.EAST);
+        
+        jpResult.add(jl6,BorderLayout.NORTH);
+        jpResult.add(jscrollp1,BorderLayout.CENTER);
+        jpResult.add(jpr1,BorderLayout.SOUTH);
+        
+		jb1.addActionListener(this);
+		jb1.setActionCommand("initial");
+		jb3.addActionListener(this);
+		jb3.setActionCommand("run");
+		jb4.addActionListener(this);
+		jb4.setActionCommand("back");
+		jb5.addActionListener(this);
+		jb5.setActionCommand("import");
+        
+		
+		//input panel
+		JComboBox speciesJcb1 = new AutoCompleteSpeciesComboBox();
+		jcb1=speciesJcb1;
+		jcb1.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent evt) {
+	            myBox(evt);
+	            }
+			private void myBox(ActionEvent evt) {
+				// TODO Auto-generated method stub
+					    if (jcb1.getSelectedItem() != null) {
+					    	String text=jcb1.getSelectedItem().toString();
+					    	String[] taxID=text.split("\t");
+					    	//System.out.println(Arrays.toString(taxID));
+					        jtf1.setText(taxID[1]);
+					    }
+					}
+			
+	        });
+		jcb1.setPreferredSize(new Dimension(400,10));
+		
+		JLabel jli1 = new JLabel("Enter Entity List:");
+		JLabel jli21 = new JLabel("A: Paste a Entity ID list");
+		JLabel jli22 = new JLabel("Or"); 
+		JLabel jli31 = new JLabel("B:Choose From a File");
+		JLabel jlexp = new JLabel("exmaple:ENSP00000216807");
+		 jTextField1 = new JLabel("");
+		
+		jta3=new JTextArea(30,50);
+		JScrollPane jscrollp3 = new JScrollPane(jta3);
+		
+		JButton jbi1 = new JButton("clear");
+		JButton jbi2 = new JButton("Browse");
+		JButton jbi21 = new JButton("cancel");
+		JButton jbi22 = new JButton("ip_import");
+			
+		JPanel ip = new JPanel();
+		JPanel ip1 = new JPanel();
+		JPanel ip21 = new JPanel();
+		JPanel ip22 = new JPanel();
+		JPanel ip221 = new JPanel();
+		JPanel ip222 = new JPanel();
+		JPanel ip23 = new JPanel();
+		JPanel ip2 = new JPanel();
+		JPanel ip3 = new JPanel();
+		
+		ip.setLayout(new BorderLayout(5,5));
+		ip.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		ip1.setLayout(new BorderLayout(5,5));
+		ip1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		ip21.setLayout(new BorderLayout(5,5));
+		ip22.setLayout(new BorderLayout(5,5));
+		ip221.setLayout(new BorderLayout(5,5));
+		ip23.setLayout(new BorderLayout(5,5));
+		ip2.setLayout(new BorderLayout(5,5));
+		ip2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		ip3.setLayout(new BorderLayout(5,5));
+		ip3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+	
+		//ip1.add(jli1,BorderLayout.WEST);
+		
+		ip21.add(jli1,BorderLayout.WEST);
+		ip21.add(jcb1,BorderLayout.NORTH);
+		
+		ip221.add(jli21,BorderLayout.NORTH);
+		ip221.add(jlexp,BorderLayout.CENTER);
+		ip221.add(jli22,BorderLayout.SOUTH);
+		
+		ip222.add(jbi1);
+		
+		ip22.add(ip221,BorderLayout.WEST);
+		ip22.add(jscrollp3,BorderLayout.CENTER);
+		ip22.add(ip222,BorderLayout.EAST);
+
+		ip23.add(jli31,BorderLayout.WEST);
+		ip23.add(jbi2,BorderLayout.CENTER);
+		ip23.add(jTextField1,BorderLayout.EAST);
+		
+		ip2.add(ip21,BorderLayout.NORTH);
+		ip2.add(ip22,BorderLayout.CENTER);
+		ip2.add(ip23,BorderLayout.SOUTH);
+		
+		ip3.add(jbi21,BorderLayout.WEST);
+		ip3.add(jbi22,BorderLayout.EAST);
+		
+		jbi1.addActionListener(this);
+		jbi1.setActionCommand("clear");
+		jbi2.addActionListener(this);
+		jbi2.setActionCommand("browse");
+		jbi21.addActionListener(this);
+		jbi21.setActionCommand("cancel");
+		jbi22.addActionListener(this);
+		jbi22.setActionCommand("ip_import");
+		
+		
+		//layout
+		String SearchPANEL = "Search Entity information from String";
+		String InputPANEL = "Input Entity information";
+		mainP = new JPanel(new CardLayout());
+		
+		//search panel
+		JPanel sp =new JPanel(new GridLayout(2,1));
+		sp.setLayout(new GridLayout(2,1));
+		sp.add(jpSearch);
+		sp.add(jpResult);
+		//input panel
+		//ip.add(ip1,BorderLayout.NORTH);
+		ip.add(ip2,BorderLayout.CENTER);
+		ip.add(ip3,BorderLayout.SOUTH);
+		//main panel
+		mainP.add(sp,SearchPANEL);
+		mainP.add(ip,InputPANEL);
+		
+		
+		JPanel comboBoxPane = new JPanel(); //use FlowLayout
+		String comboBoxItems[] = { SearchPANEL, InputPANEL };
+		JComboBox cb = new JComboBox(comboBoxItems);
+		cb.setEditable(false);
+		cb.addItemListener((ItemListener) this);
+		comboBoxPane.add(cb);
+		JLabel jl00=new JLabel("literature Source:");
+		JPanel jlsp=new JPanel();
+		jlsp.add(jl00);
+		jlsp.add(comboBoxPane);
+		
+		this.add(jlsp, BorderLayout.PAGE_START);
+		this.add(mainP, BorderLayout.CENTER);
+
+
+		Insets insets1 = this.getInsets();
+		this.setSize(800 + insets1.left + insets1.right,
+                600 + insets1.top + insets1.bottom);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+	}
+
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("initial"))
+		{
+			jtf1.setText("9606");
+			jtf3.setText("100");
+		}
+		else if(e.getActionCommand().equals("run"))
+		{
+			type2=jtf1.getText();
+			limit=Integer.parseInt(jtf3.getText());
+			System.out.println(limit);
+			SearchEntityFactory factory=new  SearchEntityFactory(type2,limit,pubmed_ids);
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this);
+			
+		}
+		else if(e.getActionCommand().equals("import"))
+		{
+			if(jta1.getText()!=null){
+				System.out.println("Start network");
+			BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this);
+			 setVisible(false); //you can't see me!
+			 dispose();
+			}
+			else{
+				System.out.println("print run first");
+			}
+		}
+		else if(e.getActionCommand().equals("back"))
+		{
+			Interface Interface =  new Interface(serviceRegistrar);
+        	Interface.setVisible(true);
+        	setVisible(false); //you can't see me!
+        	dispose();
+		}
+		else if(e.getActionCommand().equals("browse"))
+		{
+			JFileChooser fileDlg = new JFileChooser();
+		    fileDlg.showOpenDialog(this);
+		    String filename = fileDlg.getSelectedFile().getAbsolutePath();
+		    jTextField1.setText(filename);
+
+		    FileInputStream fis;
+			try {
+				fis = new FileInputStream(filename);
+				byte buffer[] = new byte[fis.available()];
+			    fis.read(buffer);
+			    String message = new String(buffer);
+			    jta3.setText(message);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}  
+		}
+		else if(e.getActionCommand().equals("clear"))
+		{
+			jta3.setText("");
+		}
+	}
+
+
+	@Override
+	public void allFinished(FinishStatus arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void taskFinished(ObservableTask arg0) {
+		//todo
+		if(arg0.getClass().getSimpleName().equals("SearchEntityTask")) {
+			System.out.println("Start");
+			String text = "";
+			entity_ids= new ArrayList();
+			for(PubmedEntity et : (List<PubmedEntity>) arg0.getResults(List.class)) {
+				
+				text += et.getType()+"."+et.getEntityID() +"\t"+et.getName()+ "\n";
+				entity_ids.add(et.getType()+"."+et.getEntityID());	
+			}
+			jta1.setText(text);
+		} else if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
+			ShowNetworkFactory factory=new ShowNetworkFactory(this.serviceRegistrar.getService(CyNetworkManager.class),
+					this.serviceRegistrar.getService(CyNetworkNaming.class),
+					this.serviceRegistrar.getService(CyNetworkFactory.class),
+					arg0.getResults(JSONObject.class));
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this);
+			
+		} 
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		CardLayout cl = (CardLayout)(mainP.getLayout());
+	    cl.show(mainP, (String)e.getItem());
+	}
+}
+
+
+
+
+
+class AutoCompleteSpeciesComboBox extends JComboBox
+{
+   public int caretPos=0;
+   public JTextField inputField=null;
+  
+   public AutoCompleteSpeciesComboBox() {
+      setEditor(new BasicComboBoxEditor());
+      setEditable(true);
+      try {
+			Species.readSpecies();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Species> speciesList1 = Species.getSpecies();
+		this.addItem("HOMO SAPIEN\t9606");
+		for (Species species: speciesList1) {
+			this.addItem(species.getOfficialName().toUpperCase()+"\t"+species.getTaxId());
+		}
+		this.setEditable(true);	
+		this.setPreferredSize(new Dimension(400,10));		
+   }
+   public void setSelectedIndex(int index) {
+      super.setSelectedIndex(index);
+      inputField.setText(getItemAt(index).toString());
+      inputField.moveCaretPosition(caretPos);
+   }
+   public void setEditor(ComboBoxEditor editor) {
+      super.setEditor(editor);
+      if (editor.getEditorComponent() instanceof JTextField) {
+         inputField = (JTextField) editor.getEditorComponent();
+  
+         inputField.addKeyListener(new KeyAdapter() {
+            public void keyReleased( KeyEvent ev ) {
+               char key=ev.getKeyChar();
+               if (! (Character.isLetterOrDigit(key) || Character.isSpaceChar(key) )) return;
+  
+               caretPos=inputField.getCaretPosition();
+               String text="";
+               try {
+                  text=inputField.getText(0, caretPos);
+               }
+               catch (javax.swing.text.BadLocationException e) {
+                  e.printStackTrace();
+               }
+  
+               for (int i=0; i<getItemCount(); i++) {
+                  String element = (String) getItemAt(i);
+                  if (element.startsWith(text.toUpperCase())) {
+                     setSelectedIndex(i);
+                     return;
+                  }
+               }
+            }
+         });
+      }
+   }
+}
+

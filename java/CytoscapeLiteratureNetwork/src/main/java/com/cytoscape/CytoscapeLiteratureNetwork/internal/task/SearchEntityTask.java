@@ -21,19 +21,20 @@ import org.json.simple.JSONObject;
 public class SearchEntityTask extends AbstractTask implements ObservableTask {
 	private List<String> ids;
 	private List<PubmedEntity> pmet;
-	final int limit=100;
+	private int limit;
 	private String type2;
-	public SearchEntityTask(String type2,List<String> ids){
+	public SearchEntityTask(String type2,int limit,List<String> ids){
 		this.ids=ids;
 		this.type2=type2;
+		this.limit=limit;
 		//this.limit = limit;
 		// TODO： Test
 		this.pmet=new ArrayList<>();
+		System.out.println(this.limit);
 	}
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		// TODO Auto-generated method stub
-		
 		monitor.showMessage(TaskMonitor.Level.INFO,"Pubmed returned "+ids.size()+" results, of which we downloaded "+ids.size());
 		
 		Map<String, String> args = new HashMap<>();
@@ -43,7 +44,7 @@ public class SearchEntityTask extends AbstractTask implements ObservableTask {
 		}
 		args.put("documents", sb.toString());
 		args.put("format", "json");
-		args.put("limit", Integer.toString(limit));
+		args.put("limit",  Integer.toString(limit));
 		args.put("type2", type2);
 		monitor.setTitle("Querying STRING");
 		monitor.setStatusMessage("Querying String Entities");
@@ -51,6 +52,7 @@ public class SearchEntityTask extends AbstractTask implements ObservableTask {
 				args);
 		
 		JSONArray result = (JSONArray) object.get("result");
+		//System.out.println(result);
 		if (result == null) {
 			monitor.showMessage(TaskMonitor.Level.ERROR,"String returned no results");
 			// System.out.println("object wrong type: "+object.toString());

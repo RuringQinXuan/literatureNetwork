@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Apr  1 20:49:19 2019
+
+@author: xqin
+"""
+
 #code based on Python 3.6
 #encoding=utf-8
 #qinxuan
@@ -16,10 +23,10 @@ from itertools import combinations
 #begin =time.clock()
 
 #pmid_list file
-#documents = "30030436\n30030434\n30760519"
+documents = "30030436\n30030434\n30760519"
 
 #entity_list file
-#entities = "9606.ENSP00000365687\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000356213\n9606.ENSP00000466090\n9606.ENSP00000229135\n9606.ENSP00000466090\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000277541\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000358363\n9606.ENSP00000437256\n9606.ENSP00000425979\n9606.ENSP00000437256\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000405330\n9606.ENSP00000405330\n9606.ENSP00000216037\n9606.ENSP00000250448\n9606.ENSP00000399356"
+entities = "9606.ENSP00000365687\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000356213\n9606.ENSP00000466090\n9606.ENSP00000229135\n9606.ENSP00000466090\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000365687\n9606.ENSP00000277541\n9606.ENSP00000345206\n9606.ENSP00000425979\n9606.ENSP00000358363\n9606.ENSP00000437256\n9606.ENSP00000425979\n9606.ENSP00000437256\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000358363\n9606.ENSP00000405330\n9606.ENSP00000405330\n9606.ENSP00000216037\n9606.ENSP00000250448\n9606.ENSP00000399356"
 
 
 def Get_documents(documents):
@@ -112,59 +119,78 @@ def Get_abstracts(conn,documents):
         return abstracts
 
 
+class sentenceID:
+    def __init__(self, pmid,st,entityLocation1,entityLocation2):
+        self.pmid = pmid
+        self.st = st
+        self.entityLocation1 = entityLocation1
+        self.entityLocation2 = entityLocation2
+
+
 def Get_result(documents,entities):
-        documents=str(documents)
-        entities=str(entities)
-        print(documents)
-        print(entities)
-        result_relation={}
-        sentences_database={}
-        pmidList,documents = Get_documents(documents)
-        entityList,entities = Get_entities(entities)
-        #connect to database
-        conn = psycopg2.connect(host = "localhost", port = "5432",dbname = "textmining", user = "guest",password = "")
-        sentenceStop_dic = Get_sentence_location(conn,documents)
-        entity_location = Get_entity_location(conn,documents,entities)
-        abstracts = Get_abstracts(conn,documents)
-        for pmid in entity_location.keys():
-                sentenceEntityList=set()
-                if len(entity_location[pmid])>2:
-                        #to compare entity and sentence location in same pmid
-                        entityStops = list(entity_location[pmid].keys())
-                        sentencelocation = sentenceStop_dic[pmid]
-                        et = 0
-                        st = 0
-                        while et < len(entityStops):
-                                entityStart,entityStop = entityStops[et]
-                                sentenceStart,sentenceStop=sentencelocation[st]
-                                if entityStop < sentenceStop:
-                                        et = et+1
-                                        sentenceEntityList.add(str(entity_location[pmid][(entityStart,entityStop)][0])+'.'+entity_location[pmid][(entityStart,entityStop)][1])
-                                else:
-                                        if len(sentenceEntityList)>2:
-                                                        #sentenceEntityList: entity ID list from One sentence 'st'
-                                                relations=combinations(sentenceEntityList,2)
-                                                sentenceContent=abstracts[pmid][sentenceStart:sentenceStop]
-                                                sentenceID=str(pmid)+'.'+str(st)
-                                                sentences_database[sentenceID]=sentenceContent
-                                                for node in relations:
-                                                        if node not in result_relation.keys():
-                                                                result_relation[node]=[sentenceID]
-                                                        else:
-                                                                result_relation[node].append(sentenceID)
-                                        st=st+1
-                                        sentenceEntityList=set()
-                                        if st == len(sentencelocation):
-                                                break
-        conn.close()
-        edges=[]
-        nodes=set()
-        for node in result_relation.keys():
-                edges.append({"source":node[0],"target":node[1],"sentences":result_relation[node]})
-                nodes.add(node[0])
-                nodes.add(node[1])
-        nodes=list(nodes)
-        nodes_list=match_entity_name(nodes)
-        result={"edges":edges,"nodes":nodes_list,"sentences":sentences_database}
-        return result
+	documents=str(documents)
+	entities=str(entities)
+	result_relation={}
+	sentences_database={}
+	pmidList,documents = Get_documents(documents)
+	entityList,entities = Get_entities(entities)
+	#connect to database
+	conn = psycopg2.connect(host = "localhost", port = "5432",dbname = "textmining", user = "guest",password = "")
+	sentenceStop_dic = Get_sentence_location(conn,documents)
+	entity_location = Get_entity_location(conn,documents,entities)
+	abstracts = Get_abstracts(conn,documents)
+	for pmid in entity_location.keys():
+		sentenceEntityList=set()
+		if len(entity_location[pmid])>2:
+		#to compare entity and sentence location in same pmid
+			entityStops = list(entity_location[pmid].keys())
+			sentencelocation = sentenceStop_dic[pmid]
+			et = 0
+			st = 0
+			dic={}
+			while et < len(entityStops):
+				entityStart,entityStop = entityStops[et]
+				sentenceStart,sentenceStop=sentencelocation[st]
+				if entityStop < sentenceStop:
+					et = et+1
+					entityLoction=[entityStart-sentenceStart,entityStop-sentenceStart+1]
+					entityID=str(entity_location[pmid][(entityStart,entityStop)][0])+'.'+entity_location[pmid][(entityStart,entityStop)][1]
+					sentenceEntityList.add(entityID)
+					if entityID not in dic.keys():
+						dic[entityID]=[entityLoction]
+					else:
+						dic[entityID].append(entityLoction)
+				else:
+					if len(sentenceEntityList)>2:
+						#sentenceEntityList: entity ID list from One sentence 'st'
+						relations=combinations(sentenceEntityList,2)
+						sentenceContent=abstracts[pmid][sentenceStart:sentenceStop]
+						sentenceID=str(pmid)+'.'+str(st)
+						sentences_database[sentenceID]=sentenceContent
+						for node in relations:
+							if (node[0],node[1]) not in result_relation.keys():
+								if (node[1],node[0]) not in result_relation.keys():
+									result_relation[(node[0],node[1])]=[{"sentenceID":sentenceID,"entityLocation1":dic[node[0]],"entityLocation2":dic[node[1]]}]
+								else:
+									result_relation[(node[1],node[0])].append({"sentenceID":sentenceID,"entityLocation1":dic[node[1]],"entityLocation2":dic[node[0]]})
+							else:
+								result_relation[(node[0],node[1])].append({"sentenceID":sentenceID,"entityLocation1":dic[node[0]],"entityLocation2":dic[node[1]]})
+					dic={}                                        
+					st=st+1
+					sentenceEntityList=set()
+					if st == len(sentencelocation):
+						break
+	#{('9606.ENSP00000358363', '9606.ENSP00000425979'): [['30030436.6', [[180, 186], [189, 198]], [[48, 53]]]], ('9606.ENSP00000358363', '9606.ENSP00000437256'): [['30030436.6', [[180, 186], [189, 198]], [[75, 80]]]], ('9606.ENSP00000425979', '9606.ENSP00000437256'): [['30030436.6', [[48, 53]], [[75, 80]]]]}
+	conn.close()
+	edges=[]
+	nodes=set()
+	for node in result_relation.keys():
+		edges.append({"source":node[0],"target":node[1],"sentences":result_relation[node]})
+		nodes.add(node[0])
+		nodes.add(node[1])
+	nodes=list(nodes)
+	nodes_list=match_entity_name(nodes)
+	result={"edges":edges,"nodes":nodes_list,"sentences":sentences_database}
+	return result
+#{'edges': [{'source': '9606.ENSP00000275493', 'target': '9606.ENSP00000407586', 'sentences': [{'sentenceID': '30893511.4', 'entityLocation1': [[246, 249]], 'entityLocation2': [[234, 237]]}]}, {'source': '9606.ENSP00000275493', 'target': '9606.ENSP00000451828', 'sentences': [{'sentenceID': '30542713.13', 'entityLocation1': [[41, 44]], 'entityLocation2': [[55, 57]]}]}, {'source': '9606.ENSP00000407586', 'target': '9606.ENSP00000451828', 'sentences': [{'sentenceID': '30181243.5', 'entityLocation1': [[71, 74], [92, 95], [214, 217]], 'entityLocation2': [[253, 255]]}]}, {'source': '9606.ENSP00000385675', 'target': '9606.ENSP00000407586', 'sentences': [{'sentenceID': '26762195.5', 'entityLocation1': [[141, 143]], 'entityLocation2': [[112, 115]]}]}, {'source': '9606.ENSP00000385675', 'target': '9606.ENSP00000264657', 'sentences': [{'sentenceID': '30420046.10', 'entityLocation1': [[169, 172]], 'entityLocation2': [[93, 97]]}]}, {'source': '9606.ENSP00000407586', 'target': '9606.ENSP00000264657', 'sentences': [{'sentenceID': '27003603.4', 'entityLocation1': [[207, 210]], 'entityLocation2': [[0, 4]]}]}], 'nodes': {'9606.ENSP00000358363': {'name': 'PDE4DIP', 'type_id': '9606.ENSP00000358363', 'type': 9606, 'id': 'ENSP00000358363'}, '9606.ENSP00000425979': {'name': 'DROSHA', 'type_id': '9606.ENSP00000425979', 'type': 9606, 'id': 'ENSP00000425979'}, '9606.ENSP00000437256': {'name': 'DICER1', 'type_id': '9606.ENSP00000437256', 'type': 9606, 'id': 'ENSP00000437256'}}, 'sentences': {'30030436.6': 'We identified recurrent homozygous deletions of DROSHA, acting upstream of DICER1 in microRNA processing, and a novel microduplication involving chromosomal region 1q21 containing PDE4DIP (myomegalin), comprising the ancient DUF1220 protein domain.'}}
 

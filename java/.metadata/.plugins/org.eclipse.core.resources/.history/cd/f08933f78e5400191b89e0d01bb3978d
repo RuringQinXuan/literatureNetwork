@@ -1,0 +1,28 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.object;
+
+import java.util.List;
+
+import org.json.simple.JSONObject;
+
+public class Sentence {
+
+	private String sentenceID;
+	private List<Integer> entityLocation1,entityLocation2;
+	
+	public Sentence(JSONObject o){
+		sentenceID=(String) o.get("uid");
+		entityLocation1 = (List<Integer>) o.get("entityLocation1");
+		entityLocation2 = (List<Integer>) o.get("entityLocation2");
+
+	}
+	public String getSentenceID() {
+		return sentenceID;
+	}
+	public List<Integer> getEntityLocation1() {
+		return entityLocation1;
+	}
+	public List<Integer> getEntityLocation2() {
+		return entityLocation2;
+	}
+
+}

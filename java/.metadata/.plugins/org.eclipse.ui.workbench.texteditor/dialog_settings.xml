@@ -2,22 +2,25 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="panc" key="selection"/>
+		<item value="jb2" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="panc"/>
-			<item value="sentences"/>
-			<item value="System."/>
-			<item value="pubmed_ids"/>
-			<item value="ids"/>
+			<item value="jb2"/>
+			<item value="jta1"/>
+			<item value="entity_ids"/>
+			<item value="System"/>
+			<item value="type2"/>
+			<item value="jtf3"/>
 			<item value="jtf1"/>
-			<item value="input"/>
-			<item value="CyTable"/>
+			<item value="jtf2"/>
 		</list>
 		<list key="replacehistory">
+			<item value="initial"/>
+			<item value="jbi22"/>
+			<item value="jbi21"/>
 			<item value="pmids"/>
 		</list>
 	</section>
@@ -25,7 +28,7 @@
 		<item value="338" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<item value="406" key="DIALOG_HEIGHT"/>
-		<item value="170" key="DIALOG_X_ORIGIN"/>
-		<item value="327" key="DIALOG_Y_ORIGIN"/>
+		<item value="896" key="DIALOG_X_ORIGIN"/>
+		<item value="555" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

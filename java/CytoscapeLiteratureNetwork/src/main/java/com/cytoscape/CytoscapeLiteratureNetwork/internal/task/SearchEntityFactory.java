@@ -9,15 +9,16 @@ public class SearchEntityFactory extends AbstractTaskFactory {
 
 	private List<String> ids;
 	private String type2;
-
-	public SearchEntityFactory(String type2,List<String> ids){
+	private int limit;
+	public SearchEntityFactory(String type2,int limit,List<String> ids){
 		this.ids=ids;
 		this.type2=type2;
+		this.limit=limit;
 	}
 	@Override
 	public TaskIterator createTaskIterator() {
 		// TODO Auto-generated method stub
-		return new TaskIterator(new SearchEntityTask(type2,ids));
+		return new TaskIterator(new SearchEntityTask(type2,limit,ids));
 	}
 
 }

@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
-<fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Network"/>
 <fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.task.ShowSentenceFactory"/>
 <fullyQualifiedTypeName name="org.cytoscape.task.EdgeViewTaskFactory"/>
@@ -26,4 +25,10 @@
 <fullyQualifiedTypeName name="org.cytoscape.work.TaskObserver"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.awt.CardLayout"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="java.io.FileReader"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
 </qualifiedTypeNameHistroy>

@@ -1,0 +1,5 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.object;
+
+public class Sentence {
+
+}
