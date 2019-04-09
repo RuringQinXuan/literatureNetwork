@@ -15,13 +15,11 @@
 <fullyQualifiedTypeName name="org.cytoscape.model.CyRow"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
-<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 <fullyQualifiedTypeName name="org.cytoscape.service.util.CyServiceRegistrar"/>
 <fullyQualifiedTypeName name="org.cytoscape.command.AvailableCommands"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="org.cytoscape.command.CommandExecutorTaskFactory"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.cytoscape.work.TaskObserver"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -31,4 +29,15 @@
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.FileReader"/>
 <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.AutoCompleteSpeciesComboBox"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.DefineSpeciesPanel"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Species"/>
+<fullyQualifiedTypeName name="javax.swing.JSlider"/>
+<fullyQualifiedTypeName name="javax.swing.JLabel"/>
+<fullyQualifiedTypeName name="javax.swing.JTextField"/>
+<fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+<fullyQualifiedTypeName name="com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.DefineEntityNumberPanel"/>
+<fullyQualifiedTypeName name="javax.swing.BorderFactory"/>
+<fullyQualifiedTypeName name="javax.swing.JPanel"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

@@ -25,23 +25,18 @@ import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.InterfaceEntity;
 import java.net.*;
 import java.io.*;
 
-public class Interface extends JFrame implements ActionListener, TaskObserver,KeyListener,ItemListener{
+public class Interface extends JFrame implements ActionListener, TaskObserver,ItemListener{
 	/**
 	 * 
 	 */
 	private String query;
 	//private ArrayList<String> chatter;
 	private static final long serialVersionUID = 1L;
-	JPanel jp2,jp11,jp111,jp12,jp13,jp21,jp22,jp23,sp,mainP,ip,ip1,ip2,ip11,ip12,ip121,ip13;
-	JButton jb1,jb2,jb3,jb4,jb5,jb6,jbi1,jbi21,jbi22;
-	JLabel jl1,jl2,jl3,jli1,jli21,jli22,jli23,jTextField1;
-	JTextField jtfb,jtd1,jtd2;
-	JCheckBox jcb1;
-	JTextArea jta1,jta2,jta3;
-	JEditorPane pane;
-	JScrollPane jscrollp1,jscrollp2,jscrollp3;
-	JSplitPane jsp;
-	JComboBox jcb=null;
+	JPanel jp_pubmed_result,jp_pubmed_query_button,jp_pubmed_button,main_P;
+	JButton jb_pubmed_delete,jb_pubmed_run,jb_pubmed_cancel,jb_pubmed_next,jb_pubmed_paste_clear,jb_pubmed_ip_cancel,jb_pubmed_browse,jb_pubmed_ip_next;
+	JLabel jl1,jlPubmedQuery,jl_pubmed_result,jl_file_dir;
+	JTextArea jta_pubmed_query,jta_pubmed_paste;
+	JEditorPane jep_pubmed_result;
 	
 	private List<String> pubmed_ids;
 	
@@ -50,205 +45,201 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 	
 	public Interface(CyServiceRegistrar serviceRegistrar){
 		this.serviceRegistrar=serviceRegistrar;
-		//search  panel
-		jl1= new JLabel("Species:");
-		jl2= new JLabel("PubMed Query:");
-		jl3= new JLabel("PubMed Query Result:");
-			
-		jb1= new JButton("delete");
-		jb3= new JButton("run");
-		jb4= new JButton("cancel");
-		jb5= new JButton("next");
-
 		
-		jta1= new JTextArea (30,30);
+//pubmed label
+		JLabel jl_pubmed = new JLabel("literature Source:");
+		
+//query part
+		
+	//query enter
+		//query  label
+		JLabel jl_pubmed_query = new JLabel("A:PubMed Query:");
+		JPanel jp_pubmed_query_jl=new JPanel();
+		jp_pubmed_query_jl.setLayout(new BorderLayout(5,5));
+		jp_pubmed_query_jl.add(jl_pubmed_query,BorderLayout.WEST);
+		//query enter
+		jta_pubmed_query= new JTextArea (30,30);
 		String text = "breast cancer";
-		jta1.setText(text);
-		jta1.setLineWrap(true);
-		jta1.setWrapStyleWord(true);
-		pane=new JEditorPane();
-		pane.setSize(30, 30);
-		jta2=new JTextArea(30,30);
+		jta_pubmed_query.setText(text);
+		jta_pubmed_query.setLineWrap(true);
+		jta_pubmed_query.setWrapStyleWord(true);
+		JScrollPane jscrollp_pubmed_query = new JScrollPane(jta_pubmed_query);
+		jscrollp_pubmed_query.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jscrollp_pubmed_query.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
+		//query button panel
+		jb_pubmed_delete= new JButton("delete");
+		jb_pubmed_run= new JButton("run");
+		jb_pubmed_delete.addActionListener(this);
+		jb_pubmed_delete.setActionCommand("delete");
+		jb_pubmed_run.addActionListener(this);
+		jb_pubmed_run.setActionCommand("run");
+		JPanel jp_pubmed_query_button = new JPanel();
+		jp_pubmed_query_button.add(jb_pubmed_delete);
+		jp_pubmed_query_button.add(jb_pubmed_run);
+		//query panel
+		JPanel jp_pubmed_query_input=new JPanel();
+		jp_pubmed_query_input.setLayout(new BorderLayout(5,5));
+		jp_pubmed_query_input.add(jp_pubmed_query_jl,BorderLayout.NORTH);
+		jp_pubmed_query_input.add(jscrollp_pubmed_query,BorderLayout.CENTER);
+		jp_pubmed_query_input.add(jp_pubmed_query_button,BorderLayout.SOUTH);
 		
-		jscrollp1=new JScrollPane(jta1);
-		jscrollp2=new JScrollPane(pane);
-		jscrollp1.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		jscrollp1.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
-		jscrollp2.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
-		jscrollp2.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 
+	//pubmed query result part
+		//pubmed result label
+		JLabel jl_pubmed_query_result = new JLabel("PubMed Query Result:");		
+		// display result	
+		//new JEditorPane("text/html", content) dispaly html
+		jep_pubmed_result=new JEditorPane();
+		jep_pubmed_result.setSize(30, 30);		
+		//scroll format
+		JScrollPane jscrollp_pubmed_result = new JScrollPane(jep_pubmed_result);
+		jscrollp_pubmed_result.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
+		jscrollp_pubmed_result.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 		
+		//control scroll display when needs
+		JSplitPane JSplitPane_pubmed_result = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+		JSplitPane_pubmed_result.setOneTouchExpandable(true);
+		JSplitPane_pubmed_result.setLayout(new BorderLayout(5,5));
+		JSplitPane_pubmed_result.add(jl_pubmed_query_result,BorderLayout.NORTH);		
+		JSplitPane_pubmed_result.add(jscrollp_pubmed_result,BorderLayout.CENTER);
 		
-		jsp=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-		jsp.setOneTouchExpandable(true);
-		jsp.setLayout(new BorderLayout(5,5));
+	//pubmed query display panel	
+		JPanel jp_pubmed_query_display= new JPanel();
+		jp_pubmed_query_display.setLayout(new GridLayout(2,1));
+		jp_pubmed_query_display.add(jp_pubmed_query_input);
+		jp_pubmed_query_display.add(JSplitPane_pubmed_result);
 		
-		sp=new JPanel();
-		MyJPanel jp1=new MyJPanel();	
-		jp2=new JPanel();
-		jp11=new JPanel();	
-		jp111=new JPanel();	
-		jp12=new JPanel();
-		jp13=new JPanel();	
-		jp21=new JPanel();
-		jp22=new JPanel();	
-		jp23=new JPanel();
-		jp1.setLayout(new BorderLayout(5,5));
-		jp1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-		jp2.setLayout(new BorderLayout(5,5));
-		jp2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-		jp11.setLayout(new BorderLayout(5,5));
-		jp111.setLayout(new BorderLayout(5,5));
-		jp21.setLayout(new BorderLayout(5,5));
+	//pubmed query result button
+		//button define
+		jb_pubmed_next= new JButton("next");
+		jb_pubmed_cancel= new JButton("cancel");
+		//button funtion
+		jb_pubmed_cancel.addActionListener(this);
+		jb_pubmed_cancel.setActionCommand("cancel");
+		jb_pubmed_next.addActionListener(this);
+		jb_pubmed_next.setActionCommand("next");
+		//button panel
+		jp_pubmed_query_button=new JPanel();
+		jp_pubmed_query_button.setLayout(new BorderLayout(5,5));
+		jp_pubmed_query_button.add(jb_pubmed_next,BorderLayout.EAST);
+		jp_pubmed_query_button.add(jb_pubmed_cancel,BorderLayout.WEST);
 		
-		// search site
-		jp11.add(jl2,BorderLayout.SOUTH);
-		jp13.add(jb1);
-		//jp13.add(jb2);
-		jp13.add(jb3);
-		jp1.add(jp11,BorderLayout.NORTH);
-		jp1.add(jscrollp1,BorderLayout.CENTER);
-		jp1.add(jp13,BorderLayout.SOUTH);
 
-		// result display site
+//input part
+		
+	//paste part
+		//Paste label
+		JLabel jl_pubmed_paste= new JLabel("A: Paste a PMID list");
+		JLabel jl_or1 = new JLabel("Or"); 
+		JLabel jl_pubmed_exp = new JLabel("exmaple:27137076");		
+		JPanel jp_pubmed_paste_jl=new JPanel();
+		jp_pubmed_paste_jl.setLayout(new BorderLayout(5,5));
+		jp_pubmed_paste_jl.add(jl_pubmed_paste,BorderLayout.NORTH);
+		jp_pubmed_paste_jl.add(jl_pubmed_exp,BorderLayout.CENTER);
+		jp_pubmed_paste_jl.add(jl_or1,BorderLayout.SOUTH);	
+		//paste enter
+		jta_pubmed_paste = new JTextArea (30,30);
+		jta_pubmed_paste.setLineWrap(true);
+		jta_pubmed_paste.setWrapStyleWord(true);		
+		JScrollPane jscrollp_pubmed_paste = new JScrollPane(jta_pubmed_paste);
+		jscrollp_pubmed_paste.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jscrollp_pubmed_paste.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); 	
+		//paste clear button
+		jb_pubmed_paste_clear = new JButton("clear");
+		jb_pubmed_paste_clear.addActionListener(this);
+		jb_pubmed_paste_clear.setActionCommand("clear");
+		JPanel jp_pubmed_paste_button = new JPanel();
+		jp_pubmed_paste_button.setLayout(new BorderLayout(5,5));
+		jp_pubmed_paste_button.add(jb_pubmed_paste_clear,BorderLayout.NORTH);	
+		//paste panel
+		JPanel jp_pubmed_paste = new JPanel();
+		jp_pubmed_paste.setLayout(new BorderLayout(5,5));
+		jp_pubmed_paste.add(jp_pubmed_paste_jl,BorderLayout.WEST);
+		jp_pubmed_paste.add(jscrollp_pubmed_paste,BorderLayout.CENTER);
+		jp_pubmed_paste.add(jp_pubmed_paste_button,BorderLayout.EAST);	
 
-		jsp.add(jscrollp2,BorderLayout.CENTER);
-		jp21.add(jb5,BorderLayout.EAST);
-		jp21.add(jb4,BorderLayout.WEST);
 		
-		jp2.add(jl3,BorderLayout.NORTH);
-		jp2.add(jsp,BorderLayout.CENTER);
-		jp2.add(jp21,BorderLayout.SOUTH);
+	//file part
+		//file label
+		JLabel jl_pubmed_file = new JLabel("B:Choose From a File");		
+		//file button
+		JButton jb_pubmed_browse = new JButton("Browse");
+		jb_pubmed_browse.addActionListener(this);
+		jb_pubmed_browse.setActionCommand("browse");		
+		//file dir label
+		jl_file_dir = new JLabel("");		
+		//file panel
+		JPanel jp_pubmed_file = new JPanel();
+		jp_pubmed_file.setLayout(new BorderLayout(5,5));
+		jp_pubmed_file.add(jl_pubmed_file,BorderLayout.WEST);
+		jp_pubmed_file.add(jb_pubmed_browse,BorderLayout.CENTER);
+		jp_pubmed_file.add(jl_file_dir,BorderLayout.EAST);
+		
+	//input enter panel	
+		JPanel jp_pubmed_enter_input = new JPanel();
+		jp_pubmed_enter_input.setLayout(new BorderLayout(5,5));
+		jp_pubmed_enter_input.add(jp_pubmed_paste,BorderLayout.CENTER);
+		jp_pubmed_enter_input.add(jp_pubmed_file,BorderLayout.SOUTH);
+		
+	// pubmed input button panel		
+		//button define
+		jb_pubmed_ip_next = new JButton("next");
+		jb_pubmed_ip_cancel= new JButton("cancel");
+		//button funtion
+		jb_pubmed_ip_next.addActionListener(this);
+		jb_pubmed_ip_next.setActionCommand("ip_next");
+		jb_pubmed_ip_cancel.addActionListener(this);
+		jb_pubmed_ip_cancel.setActionCommand("cancel");
+		//button panel
+		JPanel jp_pubmed_ip_button = new JPanel();
+		jp_pubmed_ip_button.setLayout(new BorderLayout(5,5));
+		jp_pubmed_ip_button.add(jb_pubmed_ip_next,BorderLayout.EAST);
+		jp_pubmed_ip_button.add(jb_pubmed_ip_cancel,BorderLayout.WEST);
 
 		
-		jb1.addActionListener(this);
-		jb1.setActionCommand("delete");
-//		jb2.addActionListener(this);
-//		jb2.setActionCommand("pause");
-		jb3.addActionListener(this);
-		jb3.setActionCommand("run");
-		jb4.addActionListener(this);
-		jb4.setActionCommand("cancel");
-		jb5.addActionListener(this);
-		jb5.setActionCommand("next");
-		
-		//input panel
-		jli1 = new JLabel("Enter PMID List:");
-		jli21= new JLabel("A: Paste a PMID list");
-		jli22= new JLabel("Or"); 
-		JLabel jli31 = new JLabel("B:Choose From a File");
-		JLabel jlexp = new JLabel("exmaple:27137076");
-		jTextField1 = new JLabel("");
-		jta3=new JTextArea(30,50);
-		jscrollp3=new JScrollPane(jta3);
-		
-		jbi1 = new JButton("clear");
-		JButton jbi2 = new JButton("Browse");
-		jbi21= new JButton("cancel");
-		jbi22= new JButton("next");
-			
-		ip=new JPanel();
-		ip1=new JPanel();
-		JPanel ip21 = new JPanel();
-		JPanel ip22 = new JPanel();
-		JPanel ip221 = new JPanel();
-		JPanel ip222 = new JPanel();
-		JPanel ip23 = new JPanel();
-		ip2=new JPanel();
-		JPanel ip3 = new JPanel();
-		
-		ip.setLayout(new BorderLayout(5,5));
-		ip.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-		ip1.setLayout(new BorderLayout(5,5));
-		ip1.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-		ip21.setLayout(new BorderLayout(5,5));
-		ip22.setLayout(new BorderLayout(5,5));
-		ip221.setLayout(new BorderLayout(5,5));
-		ip23.setLayout(new BorderLayout(5,5));
-		ip2.setLayout(new BorderLayout(5,5));
-		ip2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-		ip3.setLayout(new BorderLayout(5,5));
-		ip3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
-	
-		//ip1.add(jli1,BorderLayout.WEST);
-		
-		ip21.add(jli1,BorderLayout.WEST);
-		
-		ip221.add(jli21,BorderLayout.NORTH);
-		ip221.add(jlexp,BorderLayout.CENTER);
-		ip221.add(jli22,BorderLayout.SOUTH);
-		
-		ip222.add(jbi1);
-		
-		ip22.add(ip221,BorderLayout.WEST);
-		ip22.add(jscrollp3,BorderLayout.CENTER);
-		ip22.add(ip222,BorderLayout.EAST);
-
-		ip23.add(jli31,BorderLayout.WEST);
-		ip23.add(jbi2,BorderLayout.CENTER);
-		ip23.add(jTextField1,BorderLayout.EAST);
-		
-		ip2.add(ip21,BorderLayout.NORTH);
-		ip2.add(ip22,BorderLayout.CENTER);
-		ip2.add(ip23,BorderLayout.SOUTH);
-		
-		ip3.add(jbi21,BorderLayout.WEST);
-		ip3.add(jbi22,BorderLayout.EAST);
-		
-		jbi1.addActionListener(this);
-		jbi1.setActionCommand("clear");
-		jbi2.addActionListener(this);
-		jbi2.setActionCommand("browse");
-		jbi21.addActionListener(this);
-		jbi21.setActionCommand("cancel");
-		jbi22.addActionListener(this);
-		jbi22.setActionCommand("ip_next");
-		
-		//layout
-		String SearchPANEL = "Search literature information from PubMed";
+//pubmed main panel		
+		String QueryPANEL = "Query literature information from PubMed";
 		String InputPANEL = "Input literature information";
-		mainP=new JPanel(new CardLayout());
+		main_P = new JPanel(new CardLayout());
+		main_P.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
 		
-		//search panel
-		sp.setLayout(new GridLayout(2,1));
-		sp.add(jp1);
-		sp.add(jp2);
+		//query panel
+		JPanel jp_pubmed_query = new JPanel();
+		jp_pubmed_query.setLayout(new BorderLayout(5,5));
+		jp_pubmed_query.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		jp_pubmed_query.add(jp_pubmed_query_display,BorderLayout.CENTER);
+		jp_pubmed_query.add(jp_pubmed_query_button,BorderLayout.SOUTH);
+
 		//input panel
-		//ip.add(ip1,BorderLayout.NORTH);
-		ip.add(ip2,BorderLayout.CENTER);
-		ip.add(ip3,BorderLayout.SOUTH);
-		//main panel
-		mainP.add(sp,SearchPANEL);
-		mainP.add(ip,InputPANEL);
+		JPanel jp_pubmed_input = new JPanel();
+		jp_pubmed_input.setLayout(new BorderLayout(5,5));
+		jp_pubmed_input.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		jp_pubmed_input.add(jp_pubmed_enter_input,BorderLayout.CENTER);
+		jp_pubmed_input.add(jp_pubmed_ip_button,BorderLayout.SOUTH);
 		
+		//main panel
+		main_P.add(jp_pubmed_query,QueryPANEL);
+		main_P.add(jp_pubmed_input,InputPANEL);
+		jlPubmedQuery= new JLabel("PubMed Query:");
 		
 		JPanel comboBoxPane = new JPanel(); //use FlowLayout
-		String comboBoxItems[] = { SearchPANEL, InputPANEL };
-		JComboBox cb = new JComboBox(comboBoxItems);
-		cb.setEditable(false);
-		cb.addItemListener((ItemListener) this);
-		comboBoxPane.add(cb);
-		JLabel jl00=new JLabel("literature Source:");
+		String comboBoxItems[] = { QueryPANEL, InputPANEL };
+		JComboBox jcb_pubmed = new JComboBox(comboBoxItems);
+		jcb_pubmed.setEditable(false);
+		jcb_pubmed.addItemListener((ItemListener) this);
+		comboBoxPane.add(jcb_pubmed);
+		
 		JPanel jlsp=new JPanel();
-		jlsp.add(jl00);
+		jlsp.add(jl_pubmed);
 		jlsp.add(comboBoxPane);
 		
 		this.add(jlsp, BorderLayout.PAGE_START);
-		this.add(mainP, BorderLayout.CENTER);
-
-		//Method came from the ItemListener class implementation,
-		//contains functionality to process the combo box item selecting
-
-
-		//this.setLayout(new GridLayout(2,1));
-
-		//this.add(jp2);
-		this.setSize(800,
-                600);
+		this.add(main_P, BorderLayout.CENTER);
+			
+		
+		this.setSize(800,600);
 		this.setTitle("Literature Netwrok");
 		//this.setIconImage((new ImageIcon("images/images.jpeg")).getImage());
 		this.setLocation(100, 100);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		//this.setVisible(true);
-		this.addKeyListener(jp1);
 		
 	}
 	
@@ -258,15 +249,11 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 		// TODO Auto-generated method stub
 		if(e.getActionCommand().equals("delete"))
 		{
-			jta1.setText("");
-		}
-		else if(e.getActionCommand().equals("pause"))
-		{
-			System.out.println("click bb");
+			jta_pubmed_query.setText("");
 		}
 		else if(e.getActionCommand().equals("run"))
 		{
-			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(jta1.getText());
+			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(jta_pubmed_query.getText());
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		}
@@ -279,7 +266,7 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 		}
 		else if(e.getActionCommand().equals("ip_next"))
 		{
-			 pubmed_ids=Arrays.asList(jta3.getText().split("\\s+"));
+			 pubmed_ids=Arrays.asList(jta_pubmed_paste.getText().split("\\s+"));
 			 InterfaceEntity ei =new InterfaceEntity(serviceRegistrar, pubmed_ids);
 			 ei.setVisible(true);
 			 setVisible(false); //you can't see me!
@@ -292,14 +279,14 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 		}
 		else if(e.getActionCommand().equals("clear"))
 		{
-			jta3.setText("");
+			jta_pubmed_paste.setText("");
 		}
 		else if(e.getActionCommand().equals("browse"))
 		{
 			JFileChooser fileDlg = new JFileChooser();
 		    fileDlg.showOpenDialog(this);
 		    String filename = fileDlg.getSelectedFile().getAbsolutePath();
-		    jTextField1.setText(filename);
+		    jl_file_dir.setText(filename);
 
 		    FileInputStream fis;
 			try {
@@ -307,7 +294,7 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 				byte buffer[] = new byte[fis.available()];
 			    fis.read(buffer);
 			    String message = new String(buffer);
-			    jta3.setText(message);
+			    jta_pubmed_paste.setText(message);
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -335,79 +322,33 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,Ke
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		} else if(arg0.getClass().getSimpleName().equals("SearchPubmedMetadataTask")) {
-			String text = "";
+			String pmmdtext = "";
 			int i=0;
 			for(PubmedMetadata pm : (List<PubmedMetadata>) arg0.getResults(List.class)) {
 				i=i+1;
-				text+="["+i+"]"+"<b>"+pm.getTitle()+"</b>"
+				pmmdtext+="["+i+"]"+"<b>"+pm.getTitle()+"</b>"
 						+"<br>"+pm.getAuthors()
 								+ "<br>"+pm.getJournal()+" "+pm.getPublicdate()
 										+ "<br>PMID:"+pm.getId()+"<br><br>";
 			}
 			
-			pane.setContentType("text/html");
-			pane.setText(text);
+			jep_pubmed_result.setContentType("text/html");
+			jep_pubmed_result.setText(pmmdtext);
 		}
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
 		// TODO Auto-generated method stub
-		CardLayout cl = (CardLayout)(mainP.getLayout());
-	    cl.show(mainP, (String)e.getItem());
-	}
-
+			// TODO Auto-generated method stub
+			CardLayout cl = (CardLayout)(main_P.getLayout());
+		    cl.show(main_P, (String)e.getItem());
+	}	
 }
 
 
-
-
-class  MyJPanel extends  JPanel implements KeyListener
-{
-	/**
-	 * 
-	 */
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("search"+e.getKeyCode());
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-}
-
-class SearchPanel
+class QueryPANEL
 {
 	
 }

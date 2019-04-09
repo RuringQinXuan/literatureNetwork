@@ -40,9 +40,6 @@ public class BuildNetworkTask extends AbstractTask implements ObservableTask{
 		monitor.setStatusMessage("URL: http://localhost:9000/getdata?documents=" + query_documents + "&entities=" + query_entities);
 		result = (JSONObject)HttpUtils.postJSON("http://localhost:9000/getdata",
 				args1).get("result");
-		
-		
-		
 		if (result == null) {
 			monitor.showMessage(TaskMonitor.Level.ERROR,"Pubmed returned no results");
 			// System.out.println("object wrong type: "+object.toString());

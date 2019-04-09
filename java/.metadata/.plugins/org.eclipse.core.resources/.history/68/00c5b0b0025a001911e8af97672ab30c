@@ -1,0 +1,66 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.ui;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.AutoCompleteSpeciesComboBox;
+
+public class DefineSpeciesIDPanel extends JPanel {
+private static final long serialVersionUID = 1L;
+	
+	
+	JComboBox speciesJcb;
+	
+	private static String SpeciesID="9606";
+	public DefineSpeciesIDPanel(){
+		
+		//species input part
+		speciesJcb = new AutoCompleteSpeciesComboBox();
+		speciesJcb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				SpeciesID=myBox(evt);
+			}
+		});
+		this.SpeciesID=SpeciesID;
+		speciesJcb.setPreferredSize(new Dimension(400,10));
+		
+		//species label part
+		JLabel jl_species = new JLabel("Species: ");
+		JPanel jp_species_label = new JPanel();
+		jp_species_label.setLayout(new BorderLayout());
+		jp_species_label.add(jl_species,BorderLayout.WEST);
+		
+		//speices panel
+		JPanel jp_species = new JPanel();
+		jp_species.setLayout(new BorderLayout());
+		jp_species.add(jp_species_label,BorderLayout.NORTH);
+		jp_species.add(speciesJcb,BorderLayout.CENTER);
+
+		
+		this.setLayout(new BorderLayout());
+		this.add(jp_species,BorderLayout.CENTER);
+		
+	}
+	public static String getSpeciesID() {
+		return SpeciesID;
+	}
+	private String myBox(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		if (speciesJcb.getSelectedItem() != null) {
+			String text=speciesJcb.getSelectedItem().toString();
+			String[] taxID=text.split("\t");
+			//System.out.println(Arrays.toString(taxID));
+			return taxID[1];
+		}
+		return null;
+		
+	}
+}

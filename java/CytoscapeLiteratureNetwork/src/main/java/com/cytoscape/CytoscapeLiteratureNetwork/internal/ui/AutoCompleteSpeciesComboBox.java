@@ -35,6 +35,8 @@ public class AutoCompleteSpeciesComboBox extends JComboBox{
 		this.setEditable(true);	
 		this.setPreferredSize(new Dimension(400,10));		
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		inputField.setBounds(140, 70, 20,30);
+
 	}
 	public void setSelectedIndex(int index) {
 		super.setSelectedIndex(index);

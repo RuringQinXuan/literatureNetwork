@@ -2,33 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="jb2" key="selection"/>
+		<item value="additionalNodes" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="jb2"/>
-			<item value="jta1"/>
-			<item value="entity_ids"/>
-			<item value="System"/>
-			<item value="type2"/>
-			<item value="jtf3"/>
-			<item value="jtf1"/>
-			<item value="jtf2"/>
+			<item value="additionalNodes"/>
+			<item value="additionalNodesSlider"/>
+			<item value="addNodesInputError"/>
+			<item value="additionalNodesValue"/>
+			<item value="jtfSlider"/>
+			<item value="sliderEntityNumber"/>
+			<item value="jlSlider"/>
+			<item value="jl_protein_number"/>
 		</list>
 		<list key="replacehistory">
-			<item value="initial"/>
-			<item value="jbi22"/>
-			<item value="jbi21"/>
-			<item value="pmids"/>
+			<item value="jtf_protein_number"/>
+			<item value="jslid_protein_number"/>
+			<item value="jl_protein_number"/>
+			<item value="jp_species"/>
+			<item value="jl_species"/>
+			<item value="jp_species_label"/>
+			<item value=""/>
+			<item value="QueryPANEL"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="338" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<item value="406" key="DIALOG_HEIGHT"/>
-		<item value="896" key="DIALOG_X_ORIGIN"/>
-		<item value="555" key="DIALOG_Y_ORIGIN"/>
+		<item value="546" key="DIALOG_X_ORIGIN"/>
+		<item value="516" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

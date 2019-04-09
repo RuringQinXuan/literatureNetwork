@@ -1,0 +1,413 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.view;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicComboBoxEditor;
+
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.session.CyNetworkNaming;
+import org.cytoscape.work.FinishStatus;
+import org.cytoscape.work.ObservableTask;
+import org.cytoscape.work.TaskManager;
+import org.cytoscape.work.TaskObserver;
+import org.json.simple.JSONObject;
+
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedEntity;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.PubmedMetadata;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.object.Species;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.BuildNetworkFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchEntityFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedIDFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.SearchPubmedMetadataFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.task.ShowNetworkFactory;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.ProteinNumberPanel;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.ui.SpeciesPanel;
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.Interface;
+
+public class InterfaceEntity extends JFrame implements ActionListener, TaskObserver,ItemListener{
+
+	JButton jb_initial,jb2,jb_run,jb_entity_back,jb_entity_import=null;
+	JLabel jl_protein_number,jl_entity_result=null,jl_file_dir;
+	JPanel jpResult,jpQuery,jp_Entity_Number,jp_search_button,jp_result_button=null,jpi,jpi1,jpi2,mainP,jp_species_panel,jpis1;
+	JComboBox<?> jcb,speciesJcb,speciesJcb2,jcb1;
+	JTextField jtf2,jtf_entity_number;
+	JTextArea jta_entity_list,jtaDisplayEntity;
+	JScrollPane jscrollp_entity_list;
+
+	private List<String> pubmed_ids;
+	private String type2;
+	private int limit;
+	private List<String> entity_ids;
+	private CyServiceRegistrar serviceRegistrar;
+
+	public InterfaceEntity(CyServiceRegistrar serviceRegistrar, List<String> ids)
+	{
+		this.serviceRegistrar=serviceRegistrar;
+		this.pubmed_ids=ids;
+		
+	//species panel
+		jp_species_panel=new SpeciesPanel();
+
+	//query part
+		//query label
+		JLabel jl_entity_query = new JLabel("A:Query protein from StringApp:");
+		//protein number panel
+		jp_Entity_Number=new ProteinNumberPanel();		
+		//query button panel
+		//button
+		jb_initial= new JButton("initial");
+		jb_run= new JButton("run");
+		jb_initial.addActionListener(this);
+		jb_initial.setActionCommand("initial");
+		jb_run.addActionListener(this);
+		jb_run.setActionCommand("run");
+		//panel
+		JPanel jp_entity_query_button = new JPanel();
+		jp_entity_query_button.add(jb_initial);
+		jp_entity_query_button.add(jb_run);	
+		//query panel
+		JPanel jp_entity_query = new JPanel();
+		jp_entity_query.setLayout(new BorderLayout(5,5));
+		jp_entity_query.add(jl_entity_query,BorderLayout.WEST);
+		jp_entity_query.add(jb_entity_import,BorderLayout.CENTER);
+		jp_entity_query.add(jb_entity_import,BorderLayout.SOUTH);
+		
+	//entity list
+		//entity list label
+		JLabel jl_entity_list = new JLabel("B:Entity List");
+		JLabel jl_or = new JLabel("Or"); 
+		JPanel jp_entity_label = new JPanel();
+		jp_entity_label.setLayout(new BorderLayout(5,5));
+		jp_entity_label.add(jl_entity_list,BorderLayout.NORTH);
+		jp_entity_label.add(jl_or,BorderLayout.SOUTH);
+		//entity list jtextarea
+		jta_entity_list=new JTextArea(50,60);
+		jta_entity_list.setLineWrap(true);
+		jta_entity_list.setWrapStyleWord(true);
+		jscrollp_entity_list=new JScrollPane(jta_entity_list);
+		//entity list button panel
+		JButton jb_entity_clear = new JButton("clear");
+		jb_entity_clear.addActionListener(this);
+		jb_entity_clear.setActionCommand("clear");
+		JPanel jp_entity_list_button = new JPanel();
+		jp_entity_list_button.setLayout(new BorderLayout(5,5));
+		jp_entity_list_button.add(jb_entity_clear,BorderLayout.NORTH);
+		//entity list panel
+		JPanel jp_entity_list = new JPanel();
+		jp_entity_list.setLayout(new BorderLayout(5,5));
+		jp_entity_list.add(jp_entity_label,BorderLayout.WEST);
+		jp_entity_list.add(jscrollp_entity_list,BorderLayout.CENTER);
+		jp_entity_list.add(jp_entity_list_button,BorderLayout.EAST);
+		
+	//file 
+		//file label
+		JLabel jl_entity_file = new JLabel("C:Choose From a File");		
+		//file button
+		JButton jb_entity_browse = new JButton("Browse");
+		jb_entity_browse.addActionListener(this);
+		jb_entity_browse.setActionCommand("browse");		
+		//file dir label
+		jl_file_dir = new JLabel("");		
+		//file panel
+		JPanel jp_entity_file = new JPanel();
+		jp_entity_file.setLayout(new BorderLayout(5,5));
+		jp_entity_file.add(jl_entity_file,BorderLayout.WEST);
+		jp_entity_file.add(jb_entity_browse,BorderLayout.CENTER);
+		jp_entity_file.add(jl_file_dir,BorderLayout.EAST);
+		
+	// entity result button panel
+		jb_entity_back=new JButton("back");
+		jb_entity_import=new JButton("import");
+		jb_entity_back.addActionListener(this);
+		jb_entity_back.setActionCommand("back");
+		jb_entity_import.addActionListener(this);
+		jb_entity_import.setActionCommand("ip_import");
+		JPanel jp_entity_result_button = new JPanel();		
+		jp_entity_result_button.setLayout(new BorderLayout(5,5));
+		jp_entity_result_button.add(jb_entity_back,BorderLayout.WEST);
+		jp_entity_result_button.add(jb_entity_import,BorderLayout.EAST);
+		
+	//entity panel	
+		JPanel jp_entity = new JPanel();
+		jp_entity.setLayout(new BorderLayout(5,5));
+		jp_entity.add(jp_entity_query,BorderLayout.NORTH);
+		jp_entity.add(jp_entity_list,BorderLayout.CENTER);
+		jp_entity.add(jp_entity_file,BorderLayout.SOUTH);
+
+	//main panel
+		JPanel jp_entity_main= new JPanel();
+		jp_entity_main.setLayout(new BorderLayout(5,5));
+		jp_entity_main.add(jp_entity,BorderLayout.CENTER);
+		jp_entity_main.add(jp_entity_result_button,BorderLayout.SOUTH);
+
+		/*
+		jpResult =new JPanel();
+		jpResult.setLayout(new BorderLayout(5,5));
+		jpResult.setBorder(BorderFactory.createEmptyBorder(1, 10, 10, 10)); 
+
+
+
+
+		jpQuery.add(jp_species_panel);
+		//jpQuery.add(jps2);
+		jpQuery.add(jp_Entity_Number);
+		jpQuery.add(jp_search_button);
+
+		jp_result_button.add(jb_entity_back,BorderLayout.WEST);
+		jp_result_button.add(jb_entity_import,BorderLayout.EAST);
+
+		jpResult.add(jl_entity_result,BorderLayout.NORTH);
+		jpResult.add(jscrollp_entity_list,BorderLayout.CENTER);
+		jpResult.add(jp_result_button,BorderLayout.SOUTH);
+
+		
+		jb_entity_back.addActionListener(this);
+		jb_entity_back.setActionCommand("back");
+		jb_entity_import.addActionListener(this);
+		jb_entity_import.setActionCommand("import");
+
+
+		//input panel
+		jpis1=new SpeciesPanel();
+
+		JLabel jli1 = new JLabel("Enter Entity List:");
+		JLabel jlPast = new JLabel("A: Paste a Entity ID list");
+		
+		JLabel jlFile = new JLabel("B:Choose From a File");
+		JLabel jlexp = new JLabel("exmaple:ENSP00000216807");
+		jl_file_dir = new JLabel("");
+
+		jtaDisplayEntity=new JTextArea(30,50);
+		JScrollPane jscrollp3 = new JScrollPane(jtaDisplayEntity);
+
+		
+		JButton jb_browse = new JButton("Browse");
+		JButton jb_entity_back2 = new JButton("back");
+		JButton jb_entity_import2 = new JButton("import");
+
+		JPanel ip = new JPanel();
+		;
+		JPanel jpPastSpecies = new JPanel();
+		JPanel jpPast = new JPanel();
+		JPanel jpPastLabel = new JPanel();
+		JPanel jpPastButton = new JPanel();
+		JPanel jpFile = new JPanel();
+		JPanel ip2 = new JPanel();
+		JPanel jpInputBoutton = new JPanel();
+
+		ip.setLayout(new BorderLayout(5,5));
+		ip.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		
+		jpPastSpecies.setLayout(new BorderLayout(5,5));
+		jpPast.setLayout(new BorderLayout(5,5));
+		jpPastLabel.setLayout(new BorderLayout(5,5));
+		jpFile.setLayout(new BorderLayout(5,5));
+		ip2.setLayout(new BorderLayout(5,5));
+		ip2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+		jpInputBoutton.setLayout(new BorderLayout(5,5));
+		jpInputBoutton.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); 
+
+		//ip1.add(jli1,BorderLayout.WEST);
+
+		jpPastSpecies.add(jli1,BorderLayout.WEST);
+		jpPastSpecies.add(jpis1,BorderLayout.NORTH);
+		jpPastLabel.add(jlPast,BorderLayout.NORTH);
+		jpPastLabel.add(jlexp,BorderLayout.CENTER);
+		jpPastLabel.add(jlOr,BorderLayout.SOUTH);
+
+		
+		jpPast.add(jpPastLabel,BorderLayout.WEST);
+		jpPast.add(jscrollp3,BorderLayout.CENTER);
+		jpPast.add(jpPastButton,BorderLayout.EAST);
+
+		jpFile.add(jlFile,BorderLayout.WEST);
+		jpFile.add(jb_browse,BorderLayout.CENTER);
+		jpFile.add(jl_file_dir,BorderLayout.EAST);
+
+		//ip2.add(jpPastSpecies,BorderLayout.NORTH);
+		ip2.add(jpPast,BorderLayout.CENTER);
+		ip2.add(jpFile,BorderLayout.SOUTH);
+
+		jpInputBoutton.add(jb_entity_back2,BorderLayout.WEST);
+		jpInputBoutton.add(jb_entity_import2,BorderLayout.EAST);
+
+		
+		
+
+
+		//layout
+		String SearchPANEL = "Search Entity information from String";
+		String InputPANEL = "Input Entity information";
+		mainP = new JPanel(new CardLayout());
+
+		//search panel
+		JPanel jpEntityMain =new JPanel(new GridLayout(4,1));
+		jpEntityMain.setLayout(new GridLayout(2,1));
+		jpEntityMain.add(jpQuery);
+		jpEntityMain.add(jpResult);
+		//input panel
+		ip.add(ip2,BorderLayout.CENTER);
+		ip.add(jpInputBoutton,BorderLayout.SOUTH);
+		//main panel
+		mainP.add(jpEntityMain,SearchPANEL);
+		mainP.add(ip,InputPANEL);
+
+
+		JPanel comboBoxPane = new JPanel(); //use FlowLayout
+		String comboBoxItems[] = { SearchPANEL, InputPANEL };
+		JComboBox cb = new JComboBox(comboBoxItems);
+		cb.setEditable(false);
+		cb.addItemListener((ItemListener) this);
+		comboBoxPane.add(cb);
+		JLabel jl00=new JLabel("Entity Source:");
+		JPanel jlsp=new JPanel();
+		jlsp.add(jl00);
+		jlsp.add(comboBoxPane);
+
+		this.add(jlsp, BorderLayout.PAGE_START);
+		this.add(mainP, BorderLayout.CENTER);
+
+
+		Insets insets1 = this.getInsets();
+		*/
+		this.setSize(800,600);
+		this.setTitle("Literature Netwrok");
+		//this.setIconImage((new ImageIcon("images/images.jpeg")).getImage());
+		this.setLocation(100, 100);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand().equals("initial"))
+		{
+			//jp_species_panel.changeSpeices("9606");
+			jtf_entity_number.setText("100");
+		}
+		else if(e.getActionCommand().equals("run"))
+		{
+			
+			type2=SpeciesPanel.getSpeciesID();
+			//			type2=jp_species_panel.GetSpeices();
+			limit=Integer.parseInt(((ProteinNumberPanel) jp_Entity_Number).getEntityNumber());
+			System.out.println(limit);
+			SearchEntityFactory factory=new  SearchEntityFactory(type2,limit,pubmed_ids);
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this);
+
+		}
+		else if(e.getActionCommand().equals("import"))
+		{
+			if(jta_entity_list.getText()!=null){
+				System.out.println("Start network");
+				BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
+				TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+				taskManager.execute(factory.createTaskIterator(), this);
+				setVisible(false); //you can't see me!
+				dispose();
+			}
+			else{
+				System.out.println("print run first");
+			}
+		}
+		else if(e.getActionCommand().equals("back"))
+		{
+			Interface Interface =  new Interface(serviceRegistrar);
+			Interface.setVisible(true);
+			setVisible(false); //you can't see me!
+			dispose();
+		}
+		else if(e.getActionCommand().equals("browse"))
+		{
+			JFileChooser fileDlg = new JFileChooser();
+			fileDlg.showOpenDialog(this);
+			String filename = fileDlg.getSelectedFile().getAbsolutePath();
+			jl_file_dir.setText(filename);
+
+			FileInputStream fis;
+			try {
+				fis = new FileInputStream(filename);
+				byte buffer[] = new byte[fis.available()];
+				fis.read(buffer);
+				String message = new String(buffer);
+				jtaDisplayEntity.setText(message);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}  
+		}
+		else if(e.getActionCommand().equals("clear"))
+		{
+			jtaDisplayEntity.setText("");
+		}
+	}
+
+
+	@Override
+	public void allFinished(FinishStatus arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+
+	@Override
+	public void taskFinished(ObservableTask arg0) {
+		//todo
+		if(arg0.getClass().getSimpleName().equals("SearchEntityTask")) {
+			System.out.println("Start");
+			String text = "";
+			entity_ids= new ArrayList();
+			for(PubmedEntity et : (List<PubmedEntity>) arg0.getResults(List.class)) {
+
+				text += et.getType()+"."+et.getEntityID() +"\t"+et.getName()+ "\n";
+				entity_ids.add(et.getType()+"."+et.getEntityID());	
+			}
+			jta_entity_list.setText(text);
+		} else if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
+			ShowNetworkFactory factory=new ShowNetworkFactory(this.serviceRegistrar.getService(CyNetworkManager.class),
+					this.serviceRegistrar.getService(CyNetworkNaming.class),
+					this.serviceRegistrar.getService(CyNetworkFactory.class),
+					arg0.getResults(JSONObject.class));
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory.createTaskIterator(), this);
+
+		} 
+	}
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		CardLayout cl = (CardLayout)(mainP.getLayout());
+		cl.show(mainP, (String)e.getItem());
+	}
+}
+
+
+
+
+

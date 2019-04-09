@@ -1,0 +1,17 @@
+package com.cytoscape.CytoscapeLiteratureNetwork.internal.ui;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class PubmedQueryPanel extends JPanel{
+
+	JTextArea jta_pubmed_query;
+	
+	public PubmedQueryPanel(){
+		
+	
+	
+	}
+}
