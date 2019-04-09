@@ -278,7 +278,7 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 			}
 			jta_entity_list.setText(text);
 		} else if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
-			ShowNetworkFactory factory=new ShowNetworkFactory(this.serviceRegistrar.getService(CyNetworkManager.class),
+			ShowNetworkFactory factory=new ShowNetworkFactory(this.serviceRegistrar, this.serviceRegistrar.getService(CyNetworkManager.class),
 					this.serviceRegistrar.getService(CyNetworkNaming.class),
 					this.serviceRegistrar.getService(CyNetworkFactory.class),
 					arg0.getResults(JSONObject.class));

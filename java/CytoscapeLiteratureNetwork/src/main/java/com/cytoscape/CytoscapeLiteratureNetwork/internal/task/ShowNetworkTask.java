@@ -5,25 +5,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
+import org.cytoscape.application.swing.CySwingApplication;
+import org.cytoscape.application.swing.CytoPanel;
+import org.cytoscape.application.swing.CytoPanelComponent;
+import org.cytoscape.application.swing.CytoPanelComponent2;
+import org.cytoscape.application.swing.CytoPanelName;
+import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.events.RowsSetListener;
+import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.session.CyNetworkNaming;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.json.simple.JSONObject;
 
+import com.cytoscape.CytoscapeLiteratureNetwork.internal.view.LiteratureNetworkCytoPanel;
+
 public class ShowNetworkTask extends AbstractTask {
+	
+	private CyServiceRegistrar serviceRegistrar;
 
 	private final CyNetworkManager netMgr;
 	private final CyNetworkFactory cnf;
 	private final CyNetworkNaming namingUtil; 
 	private JSONObject result;
 	
-	public ShowNetworkTask(final CyNetworkManager netMgr, final CyNetworkNaming namingUtil, final CyNetworkFactory cnf,JSONObject result){
+	public ShowNetworkTask(CyServiceRegistrar serviceRegistrar, final CyNetworkManager netMgr, final CyNetworkNaming namingUtil, final CyNetworkFactory cnf,JSONObject result){
+		this.serviceRegistrar = serviceRegistrar;
+		
 		this.netMgr = netMgr;
 		this.cnf = cnf;
 		this.namingUtil = namingUtil;
@@ -98,11 +113,20 @@ public class ShowNetworkTask extends AbstractTask {
 		
 		netMgr.addNetwork(myNet);
 		
-		// Set the variable destroyNetwork to true, the following code will destroy a network
-		final boolean destroyNetwork = false;
-		if (destroyNetwork){
-			// Destroy it
-			 netMgr.destroyNetwork(myNet);			
+		// We register the Panel
+		CySwingApplication swingApplication = this.serviceRegistrar.getService(CySwingApplication.class);
+		CytoPanel cytoPanel = swingApplication.getCytoPanel(CytoPanelName.EAST);
+
+		// If the panel is not already registered, create it
+		if (cytoPanel.indexOfComponent(LiteratureNetworkCytoPanel.IDENTIFIER) < 0) {
+			CytoPanelComponent2 panel = new LiteratureNetworkCytoPanel(serviceRegistrar);
+
+			// Register it
+			serviceRegistrar.registerService(panel, CytoPanelComponent.class, new Properties());
+			serviceRegistrar.registerService(panel, RowsSetListener.class, new Properties());
+
+			if (cytoPanel.getState() == CytoPanelState.HIDE)
+				cytoPanel.setState(CytoPanelState.DOCK);
 		}
 	}
 }
