@@ -132,6 +132,7 @@ def Get_result(documents,entities):
 	entities=str(entities)
 	result_relation={}
 	sentences_database={}
+	pmids=set()
 	pmidList,documents = Get_documents(documents)
 	entityList,entities = Get_entities(entities)
 	#connect to database
@@ -162,6 +163,7 @@ def Get_result(documents,entities):
 						dic[entityID].append(entityLoction)
 				else:
 					if len(sentenceEntityList)>2:
+						pmids.add(str(pmid))
 						#sentenceEntityList: entity ID list from One sentence 'st'
 						relations=combinations(sentenceEntityList,2)
 						sentenceContent=abstracts[pmid][sentenceStart:sentenceStop]
@@ -190,7 +192,7 @@ def Get_result(documents,entities):
 		nodes.add(node[1])
 	nodes=list(nodes)
 	nodes_list=match_entity_name(nodes)
-	result={"edges":edges,"nodes":nodes_list,"sentences":sentences_database}
+	result={"edges":edges,"nodes":nodes_list,"sentences":sentences_database,"pmids":list(pmids)}
 	return result
 #{'edges': [{'source': '9606.ENSP00000275493', 'target': '9606.ENSP00000407586', 'sentences': [{'sentenceID': '30893511.4', 'entityLocation1': [[246, 249]], 'entityLocation2': [[234, 237]]}]}, {'source': '9606.ENSP00000275493', 'target': '9606.ENSP00000451828', 'sentences': [{'sentenceID': '30542713.13', 'entityLocation1': [[41, 44]], 'entityLocation2': [[55, 57]]}]}, {'source': '9606.ENSP00000407586', 'target': '9606.ENSP00000451828', 'sentences': [{'sentenceID': '30181243.5', 'entityLocation1': [[71, 74], [92, 95], [214, 217]], 'entityLocation2': [[253, 255]]}]}, {'source': '9606.ENSP00000385675', 'target': '9606.ENSP00000407586', 'sentences': [{'sentenceID': '26762195.5', 'entityLocation1': [[141, 143]], 'entityLocation2': [[112, 115]]}]}, {'source': '9606.ENSP00000385675', 'target': '9606.ENSP00000264657', 'sentences': [{'sentenceID': '30420046.10', 'entityLocation1': [[169, 172]], 'entityLocation2': [[93, 97]]}]}, {'source': '9606.ENSP00000407586', 'target': '9606.ENSP00000264657', 'sentences': [{'sentenceID': '27003603.4', 'entityLocation1': [[207, 210]], 'entityLocation2': [[0, 4]]}]}], 'nodes': {'9606.ENSP00000358363': {'name': 'PDE4DIP', 'type_id': '9606.ENSP00000358363', 'type': 9606, 'id': 'ENSP00000358363'}, '9606.ENSP00000425979': {'name': 'DROSHA', 'type_id': '9606.ENSP00000425979', 'type': 9606, 'id': 'ENSP00000425979'}, '9606.ENSP00000437256': {'name': 'DICER1', 'type_id': '9606.ENSP00000437256', 'type': 9606, 'id': 'ENSP00000437256'}}, 'sentences': {'30030436.6': 'We identified recurrent homozygous deletions of DROSHA, acting upstream of DICER1 in microRNA processing, and a novel microduplication involving chromosomal region 1q21 containing PDE4DIP (myomegalin), comprising the ancient DUF1220 protein domain.'}}
 

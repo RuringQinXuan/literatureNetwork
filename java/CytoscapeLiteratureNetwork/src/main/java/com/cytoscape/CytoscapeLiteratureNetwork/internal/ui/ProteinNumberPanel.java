@@ -67,7 +67,7 @@ public class ProteinNumberPanel extends JPanel{
 	final JSlider jslid_protein_number;
 	public ProteinNumberPanel(){
 		
-		JLabel jl_protein_number = new JLabel("Maxinum number of proteins query from String: ");
+		JLabel jl_protein_number = new JLabel("Maxinum number of proteins: ");
 		
 		jslid_protein_number = new JSlider(0, maxAddNodes, 40);
 		jslid_protein_number.setMinorTickSpacing(10);	

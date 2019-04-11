@@ -29,7 +29,7 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,It
 	/**
 	 * 
 	 */
-	private String query;
+	private String query_word;
 	//private ArrayList<String> chatter;
 	private static final long serialVersionUID = 1L;
 	JPanel jp_pubmed_result,jp_pubmed_query_button,jp_pubmed_button,main_P;
@@ -37,8 +37,10 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,It
 	JLabel jl1,jlPubmedQuery,jl_pubmed_result,jl_file_dir;
 	JTextArea jta_pubmed_query,jta_pubmed_paste;
 	JEditorPane jep_pubmed_result;
-	
+	private List<PubmedMetadata> pmmds;
 	private List<String> pubmed_ids;
+
+	private int subend=100;
 	
 	private CyServiceRegistrar serviceRegistrar;
 
@@ -252,14 +254,16 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,It
 			jta_pubmed_query.setText("");
 		}
 		else if(e.getActionCommand().equals("run"))
+			
 		{
-			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(jta_pubmed_query.getText());
+			query_word=jta_pubmed_query.getText();
+			SearchPubmedIDFactory factory=new SearchPubmedIDFactory(query_word);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		}
 		else if(e.getActionCommand().equals("next"))
 		{
-			 InterfaceEntity ei =new InterfaceEntity(serviceRegistrar, pubmed_ids);
+			 InterfaceEntity ei =new InterfaceEntity(serviceRegistrar, pubmed_ids,query_word);
 			 ei.setVisible(true);
 			 setVisible(false); //you can't see me!
 			 dispose();
@@ -267,7 +271,7 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,It
 		else if(e.getActionCommand().equals("ip_next"))
 		{
 			 pubmed_ids=Arrays.asList(jta_pubmed_paste.getText().split("\\s+"));
-			 InterfaceEntity ei =new InterfaceEntity(serviceRegistrar, pubmed_ids);
+			 InterfaceEntity ei =new InterfaceEntity(serviceRegistrar, pubmed_ids,query_word);
 			 ei.setVisible(true);
 			 setVisible(false); //you can't see me!
 			 dispose();
@@ -318,13 +322,17 @@ public class Interface extends JFrame implements ActionListener, TaskObserver,It
 	public void taskFinished(ObservableTask arg0) {
 		if(arg0.getClass().getSimpleName().equals("SearchPubmedIDTask")) {
 			pubmed_ids = (List<String>) arg0.getResults(List.class);
-			SearchPubmedMetadataFactory factory=new SearchPubmedMetadataFactory(pubmed_ids);
+			if(subend>pubmed_ids.size()){
+				subend=pubmed_ids.size();
+			}
+			SearchPubmedMetadataFactory factory=new SearchPubmedMetadataFactory(pubmed_ids.subList(0,subend), true);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		} else if(arg0.getClass().getSimpleName().equals("SearchPubmedMetadataTask")) {
+			 pmmds = (List<PubmedMetadata>) arg0.getResults(List.class);
 			String pmmdtext = "";
 			int i=0;
-			for(PubmedMetadata pm : (List<PubmedMetadata>) arg0.getResults(List.class)) {
+			for(PubmedMetadata pm : pmmds){
 				i=i+1;
 				pmmdtext+="["+i+"]"+"<b>"+pm.getTitle()+"</b>"
 						+"<br>"+pm.getAuthors()

@@ -52,17 +52,21 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 	JTextArea jta_entity_list,jtaDisplayEntity;
 	JScrollPane jscrollp_entity_list;
 	ProteinNumberPanel jp_Entity_Number;
-
+	private JSONObject result;
 	private List<String> pubmed_ids;
+	private List<Long> pmids_network;
 	private String type2;
-	private int limit;
+	private int limit;	
 	private CyServiceRegistrar serviceRegistrar;
-
-	public InterfaceEntity(CyServiceRegistrar serviceRegistrar, List<String> ids)
+	private String query_word;
+	private List<PubmedMetadata> pmmds;
+	List<String> entity_ids;
+	public InterfaceEntity(CyServiceRegistrar serviceRegistrar, List<String> ids,String query_word)
 	{
 		this.serviceRegistrar=serviceRegistrar;
 		this.pubmed_ids=ids;
-	
+		this.pmmds=pmmds;
+		this.query_word=query_word;
 		//entity label
 		JLabel jl_entity = new JLabel("select entity source");
 		JPanel jp_entity_main_label=new JPanel();
@@ -203,8 +207,7 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 			type2=SpeciesPanel.getSpeciesID();
 			//			type2=jp_species_panel.GetSpeices();
 			limit=Integer.parseInt(jp_Entity_Number.Get_entity_number());
-			System.out.println(limit);
-			SearchEntityFactory factory=new  SearchEntityFactory(type2,limit,pubmed_ids);
+			SearchEntityFactory factory=new  SearchEntityFactory(this.serviceRegistrar,type2,limit,pubmed_ids);
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 
@@ -213,7 +216,7 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 		{
 			if(jta_entity_list.getText()!=null){
 				System.out.println("Start network");
-				List<String> entity_ids=  Arrays.asList(jta_entity_list.getText().split("\\s+"));
+				entity_ids=  Arrays.asList(jta_entity_list.getText().split("\\s+"));
 				BuildNetworkFactory factory=new BuildNetworkFactory(pubmed_ids,entity_ids);
 				TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 				taskManager.execute(factory.createTaskIterator(), this);
@@ -221,7 +224,7 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 				dispose();
 			}
 			else{
-				System.out.println("print run first");
+				System.out.println("Select entity first");
 			}
 		}
 		else if(e.getActionCommand().equals("back"))
@@ -278,10 +281,23 @@ public class InterfaceEntity extends JFrame implements ActionListener, TaskObser
 			}
 			jta_entity_list.setText(text);
 		} else if(arg0.getClass().getSimpleName().equals("BuildNetworkTask")) {
+			
+			 result = (JSONObject) arg0.getResults(List.class);
+			 pmids_network = (List<Long>) result.get("pmids");
+			SearchPubmedMetadataFactory factory_pmmd=new SearchPubmedMetadataFactory(pmids_network);
+			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
+			taskManager.execute(factory_pmmd.createTaskIterator(), this);
+			
+		}else if(arg0.getClass().getSimpleName().equals("SearchPubmedMetadataTask")) {
+			
+			pmmds = (List<PubmedMetadata>) arg0.getResults(List.class);
+
 			ShowNetworkFactory factory=new ShowNetworkFactory(this.serviceRegistrar, this.serviceRegistrar.getService(CyNetworkManager.class),
 					this.serviceRegistrar.getService(CyNetworkNaming.class),
 					this.serviceRegistrar.getService(CyNetworkFactory.class),
-					arg0.getResults(JSONObject.class));
+					result,
+					 pmmds,pubmed_ids,entity_ids,query_word);
+			
 			TaskManager<?,?> taskManager = this.serviceRegistrar.getService(TaskManager.class);
 			taskManager.execute(factory.createTaskIterator(), this);
 		} 

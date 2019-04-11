@@ -2,37 +2,37 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="additionalNodes" key="selection"/>
+		<item value="netTable" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="additionalNodes"/>
-			<item value="additionalNodesSlider"/>
-			<item value="addNodesInputError"/>
-			<item value="additionalNodesValue"/>
-			<item value="jtfSlider"/>
-			<item value="sliderEntityNumber"/>
-			<item value="jlSlider"/>
-			<item value="jl_protein_number"/>
+			<item value="myNet.getDefaultNetworkTable()"/>
+			<item value="query"/>
+			<item value="CyTableFactory"/>
+			<item value="System"/>
+			<item value="pmids"/>
+			<item value="pmmds"/>
+			<item value="pmmds.get(contentID)"/>
+			<item value="tb_etmd.getRow(((CyIdentifiable) raw_etmd).getSUID())"/>
 		</list>
 		<list key="replacehistory">
+			<item value="netTable"/>
+			<item value="pmmd"/>
+			<item value="raw_etmd"/>
+			<item value="etmd"/>
+			<item value="etmds"/>
+			<item value="tb_etmd"/>
+			<item value="tb_pmmd"/>
 			<item value="jtf_protein_number"/>
-			<item value="jslid_protein_number"/>
-			<item value="jl_protein_number"/>
-			<item value="jp_species"/>
-			<item value="jl_species"/>
-			<item value="jp_species_label"/>
-			<item value=""/>
-			<item value="QueryPANEL"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="338" key="DIALOG_WIDTH"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 		<item value="406" key="DIALOG_HEIGHT"/>
-		<item value="546" key="DIALOG_X_ORIGIN"/>
-		<item value="516" key="DIALOG_Y_ORIGIN"/>
+		<item value="785" key="DIALOG_X_ORIGIN"/>
+		<item value="349" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>
