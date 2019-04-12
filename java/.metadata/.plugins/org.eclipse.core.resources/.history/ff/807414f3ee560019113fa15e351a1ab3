@@ -1,5 +1,0 @@
-package com.cytoscape.CytoscapeLiteratureNetwork.internal.ui;
-
-public class AutoCompleteComboBox {
-
-}

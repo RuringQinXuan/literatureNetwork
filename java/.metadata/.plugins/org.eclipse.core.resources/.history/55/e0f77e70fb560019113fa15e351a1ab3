@@ -1,5 +1,0 @@
-package com.cytoscape.CytoscapeLiteratureNetwork.internal.ui;
-
-public class DefineEntityNumber {
-	final JSlider slider1 = new JSlider(0, 100, 40);
-}
